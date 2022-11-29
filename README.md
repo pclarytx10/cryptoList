@@ -11,12 +11,18 @@ CryptoList is an early stage beta for a fully formed crypto currency research an
 - JavaScript
 - jQuery
 - AJAX
+- [LocalStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)
 - [CoinGecko API](https://www.coingecko.com/en/api)
 
 ## Screenshot(s):
 --- 
+Research Dashboard:
 ![Research Dashboard](/images/research_dashboard.png)
+
+Currency List:
 ![Currency List](/images/currency_list_sample.png)
+
+Position Size Reporting(Future):
 ![Position Sizing](images/position_sizing.png)
 ![Position Sizing2](images/position_sizing2.png)
 
@@ -27,14 +33,20 @@ Images of your actual app.
 
 In this section include the link to your deployed app and any instructions you deem important.
 
+
+
 ### Future Enhancements:
 --- 
 
 Features you plan to implement later.
 
 - [ ] User input form
+  - [ ] Currency Name or Symbol
+- [ ] Basic Reporting
+  - [ ] Currency List
 - [ ] AJAX query to CoinGecko
-- [ ] Table of Result Data
+- [ ] LocalStorage of User Input
+- [ ] Position Tracking (Future)
 
 
 ## Project MVP Description and Rubric

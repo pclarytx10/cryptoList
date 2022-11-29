@@ -25,12 +25,8 @@ CryptoList Main Page Wireframe:
 
 In this section include the link to your deployed app and any instructions you deem important.
 
-
-
-### Future Enhancements:
+### Features:
 --- 
-
-Features you plan to implement later.
 
 - [ ] User input form
   - [ ] Currency Name or Symbol
@@ -39,10 +35,13 @@ Features you plan to implement later.
 - [ ] AJAX query to CoinGecko
 - [ ] LocalStorage of User Input
   - [ ] Refresh of value on new page load
-- [ ] <span style="color:rgb(243,243,243)">Position Tracking (Future)</span>.
-- [ ] <span style="color:rgb(243,243,243)">Advanced Reporting (Future)</span>.
-  - [ ] <span style="color:rgb(243,243,243)">Portfolio Sizing</span>.
-  - [ ] <span style="color:rgb(243,243,243)">Graphs</span>.
+  
+### Future Enhancements:
+
+- [ ] <span style="color:rgb(243,243,243)">Position Tracking </span>
+- [ ] <span style="color:rgb(243,243,243)">Advanced Reporting</span>
+  - [ ] <span style="color:rgb(243,243,243)">Portfolio Sizing</span>
+  - [ ] <span style="color:rgb(243,243,243)">Graphs</span>
 
 Research Dashboard: (Future Reporting)
 

@@ -3,7 +3,7 @@
 
 CryptoList is an early stage beta for a fully formed crypto currency research and portfolio management solution. The primary purpose of this app is to beta user input and API queries. 
 
-### Technologies Used: 
+## Technologies Used: 
 --- 
 
 - HTML
@@ -11,13 +11,14 @@ CryptoList is an early stage beta for a fully formed crypto currency research an
 - JavaScript
 - jQuery
 - AJAX
+- ![CoinGecko API](https://www.coingecko.com/en/api)
 
-### Screenshot(s):
+## Screenshot(s):
 --- 
 
 Images of your actual app.
 
-### Getting Started: 
+## Getting Started: 
 --- 
 
 In this section include the link to your deployed app and any instructions you deem important.
@@ -30,3 +31,23 @@ Features you plan to implement later.
 - [ ] User input form
 - [ ] AJAX query to CoinGecko
 - [ ] Table of Result Data
+
+
+## Project MVP Description and Rubric
+--- 
+
+Your application must meet these requirements in order to be considered passing:
+
+- [ ] Render an application in the browser (Deployed using GH Pages, Netlify or Vercel).
+- [ ] Built with HTML, CSS & JavaScript (jQuery) and organized into seperate files.
+- [ ]  Have properly indented HTML, CSS & JavaScript.
+- [ ]  Have functions and variables that are named sensibly (nouns make the best variable names and verbs for function names).
+- [ ] Use AJAX to make a request to an external data source like OMDBapi and insert some of the data retrieved into the DOM.
+- [ ] Frequent commits (5 minimum) dating back to the very beginning of the project. Commit messages should be in the present tense. So, for example "adds link", "creates display of API data", or "prepares for deployment".
+- [ ] A README.md file with these sections:
+  - [x]  <Your app's title>: A description of your app. Background info of the app is a nice touch.
+  - [x] Technologies Used: List of the technologies used, e.g., JavaScript, HTML, CSS...
+  - [x] Screenshot(s): Images of your actual app.
+  - [ ] Getting Started: In this section include the link to your deployed app and any instructions you deem important.
+  - [x] Future Enhancements: Features you plan to implement later.
+    Note: Don't underestimate the value of a well crafted README.md. 

@@ -16,19 +16,9 @@ CryptoList is an early stage beta for a fully formed crypto currency research an
 
 ## Screenshot(s):
 --- 
-Research Dashboard:
+CryptoList Main Page Wireframe:
 
-![Research Dashboard](/images/research_dashboard.png)
-
-Currency List:
-
-![Currency List](/images/currency_list_sample.png)
-
-Position Size Reporting(Future):
-
-![Position Sizing](images/position_sizing.png)
-![Position Sizing2](images/position_sizing2.png)
-
+![Main Page](images/cryptolist_main.png)
 
 ## Getting Started: 
 --- 
@@ -48,7 +38,20 @@ Features you plan to implement later.
   - [ ] Currency List
 - [ ] AJAX query to CoinGecko
 - [ ] LocalStorage of User Input
-- [ ] Position Tracking (Future)
+  - [ ] Refresh of value on new page load
+- [ ] <span style="color:rgb(243,243,243)">Position Tracking (Future)</span>.
+- [ ] <span style="color:rgb(243,243,243)">Advanced Reporting (Future)</span>.
+  - [ ] <span style="color:rgb(243,243,243)">Portfolio Sizing</span>.
+  - [ ] <span style="color:rgb(243,243,243)">Graphs</span>.
+
+Research Dashboard: (Future Reporting)
+
+![Research Dashboard](/images/research_dashboard.png)
+
+Position Size Reporting(Future):
+
+![Position Sizing](images/position_sizing.png)
+![Position Sizing2](images/position_sizing2.png)
 
 
 ## Project MVP Description and Rubric

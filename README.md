@@ -38,10 +38,10 @@ In this section include the link to your deployed app and any instructions you d
   
 ### Future Enhancements:
 
-- [ ] <span style="color:rgb(243,243,243)">Position Tracking </span>
-- [ ] <span style="color:rgb(243,243,243)">Advanced Reporting</span>
-  - [ ] <span style="color:rgb(243,243,243)">Portfolio Sizing</span>
-  - [ ] <span style="color:rgb(243,243,243)">Graphs</span>
+- [ ] Position Tracking 
+- [ ] Advanced Reporting
+  - [ ] Portfolio Sizing
+  - [ ] Graphs
 
 Research Dashboard: (Future Reporting)
 

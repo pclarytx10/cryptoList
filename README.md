@@ -22,6 +22,6 @@ In this section include the link to your deployed app and any instructions you d
 ### Future Enhancements:
 --- 
 Features you plan to implement later.
-[] User input form
-[] AJAX query to CoinGecko
-[] Table of Result Data
+[ ] User input form
+[ ] AJAX query to CoinGecko
+[ ] Table of Result Data

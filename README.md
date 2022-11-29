@@ -11,7 +11,7 @@ CryptoList is an early stage beta for a fully formed crypto currency research an
 - JavaScript
 - jQuery
 - AJAX
-- ![CoinGecko API](https://www.coingecko.com/en/api)
+- [CoinGecko API](https://www.coingecko.com/en/api)
 
 ## Screenshot(s):
 --- 

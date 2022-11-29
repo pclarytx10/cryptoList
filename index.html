@@ -2,17 +2,32 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="css/style.css">
-        <script src="js/script.js"></script>
-        <title>Boilerplate</title>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script defer src="./js/script.js"></script>
+        <title>CryptoList Beta</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     </head>
     <body>
-        <h1>This is the body.</h1>
-        <p>Here is some basic text in a paragraph....for more information check out this <a href="https://www.youtube.com">Link</a></p>
-        <h2>Here is an image...</h2>
-        <img src="images/sample.jpg" alt="sample image" style="width:500px">
-        <p>Why were &lt;b&gt; (bold) and &lt;i&gt; (italics) tags replaced by &lt;strong&gt; (strong) and &lt;em&gt; (emphasis) tags as the new standard in HTML 5?</br>
-        The new tags separate content and style. The bold tag says to a browser to change the font to boldface essentially changing the content. The strong tag says to apply a strong emphasis to the text thereby applying a style. There's a second argument that the new tags provide extra meaning, "semantics", to your document.
-        </p>
+        <h1>Welcome to CryptoList</h1>
+        <p>Enter a cryptocurrency Name or Symbol to get started building your list.</p>
+        <p>Today, the global cryptocurrency market cap is <span style="color:blue">???</span>.</p>
+        <form class="row">
+            <div class="col-auto">
+                <input type="text" class="form-control" id="curInput" placeholder="bitcoin">
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-success btn-small">Submit</button>
+            </div>
+          </div>
+        </form>
+        <br><br>
+        <h2>This is where we're headed...</h2>
+        <img src="/images/cryptolist_main.png" alt="sample image" style="width:500px">
+
+        <!-- Bootstrap Script -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+ 
     </body>
 </html>

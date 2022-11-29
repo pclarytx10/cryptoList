@@ -15,6 +15,10 @@ CryptoList is an early stage beta for a fully formed crypto currency research an
 
 ## Screenshot(s):
 --- 
+![Research Dashboard](/images/research_dashboard.png)
+![Currency List](/images/currency_list_sample.png)
+![Position Sizing](images/position_sizing.png)
+![Position Sizing2](images/position_sizing2.png)
 
 Images of your actual app.
 

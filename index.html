@@ -29,14 +29,14 @@
         </div>
 
         <div id="tableDiv">
-            <table class="table table-hover">
+            <table class="table text-center table-hover">
                 <tr>
                   <th>Name</th>
                   <th>Symbol</th> 
-                  <th>Price USD</th>
-                  <th>%MC</th>
-                  <th>%ATH</th>
-                  <th>ATH</th>
+                  <th data-toggle="tooltip" title="Price in USD">USD</th>
+                  <th data-toggle="tooltip" title="% of Total Market Cap">%MC</th>
+                  <th data-toggle="tooltip" title="Relation to ATH">%ATH</th>
+                  <th data-toggle="tooltip" title="All Time High">ATH</th>
                   <th>ATH Date</th>
                   <th>Markets</th>
                 </tr>
@@ -70,7 +70,7 @@
                     <td style="color:red">-56.8%</td>
                     <td>$686.31</td>
                     <td>Nov 10, 2021</td>
-                    <td>Binance,KuCoin</td>
+                    <td>Binance, KuCoin</td>
                     <td><button type="button" class="btn btn-danger btn-sm">X</button></td>
                 </tr>
             </table>
@@ -78,8 +78,7 @@
 
         
         <div id="clearLocal">
-            <p style="color:red;">Clear Local Storage
-            <button type="button" class="btn btn-danger btn-sm">x</button></p>
+            <p id="clearText" data-toggle="tooltip" title="Clicking here will clear Local Storage.">Clear Local Storage</p>
         </div>
         <br><br>
         <!-- <h2>This is where we're headed...</h2>

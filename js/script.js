@@ -24,17 +24,29 @@ const numberWithCommas = (x) => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 }
 
+// getting global market data
 $.ajax({
     url:apiRoot + global
 }).then(
     (data) => {
         globalData = data;
-        console.log(globalData);
+        // console.log(globalData);
         let tempTCC = numberWithCommas(globalData.data.active_cryptocurrencies)
         let tempTMC = numberWithCommas(globalData.data.total_market_cap.usd.toFixed(0))
         $ttlCurrencies.text(`${tempTCC}`);
         $ttlMarketCap.text(`$${tempTMC}`);
     }
 );
+
+// cache coin data for lookup 
+$.ajax({
+    url:apiRoot + getList
+}).then(
+    (data) => {
+        coinList = data;
+        // array of coin objects, symbols are lower case, names are capitalized
+        // console.log(coinList[0]);
+        // console.log(coinList.find((coin) => coin.symbol=="eth"));
+});
 
 

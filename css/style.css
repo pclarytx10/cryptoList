@@ -6,4 +6,8 @@ body {
   }
   p {
     color: rgb(0,0,0);
+    font-size: medium;
+  }
+  #clearLocal {
+    justify-content: right;
   }

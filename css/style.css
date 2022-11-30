@@ -20,8 +20,15 @@ body {
   padding: 2%;
 }
 #formDiv {
+  display: flex;
+  flex-direction: row;
+  /* justify-content: space-between; */
+  align-items: flex-start;
   padding-top: 5%;
   padding-bottom: 5%;
+}
+#formDiv > :last-child{
+  padding-left: 2%;
 }
 #tableDiv {
   padding-top: 1%;

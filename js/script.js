@@ -1,9 +1,13 @@
-console.log("My app.js file is attached")
+// console.log("My app.js file is attached")
+const apiRoot ="https://pro-api.coingecko.com/api/v3/"
 
-$('#clearText').on('click',function(){
+$('#clearText').on('click',function() {
     //your javacript
     console.log("Clear local storage")
 });
 
-// var exampleEl = document.getElementById('clearText')
-// var tooltip = new bootstrap.Tooltip(exampleEl, trigger:"hover")
+$('#submitBtn').on('click', function(evt) {
+    const $newCrypto = $('#cryptoInput').prop('value');
+    console.log($newCrypto);
+    $('#cryptoInput').prop('value','');
+});

@@ -42,6 +42,11 @@ $.ajax({
         $ttlCurrencies.text(`${tempTCC}`);
         $ttlMarketCap.text(`$${tempTMC}`);
         $marketCapChange.text(`${tempMCC}%`);
+        if(tempMCC < 0) {
+            $marketCapChange.css('color', 'red')
+        } else {
+            $marketCapChange.css('color', 'green')
+        }
     }
 );
 

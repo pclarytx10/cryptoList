@@ -130,7 +130,7 @@ function createTableRow(coinObj) {
                     ${coinMarkets}
                     ${btnRow}
                     </tr>`
-    console.log(tableRow);
+    // console.log(tableRow);
     $("#coinsTable").append(tableRow)
 }
 
@@ -138,9 +138,14 @@ function createTableRow(coinObj) {
 $("#coinsTable").on("click", function (evt) {
     // console.log("Gonna Delete Somethnig....")
     const tgt = evt.target
-    const tgtTR = $(tgt).parentsUntil("tbody")
-    console.log($(tgtTR[1]))
-    $(tgtTR).remove()
+    if($(tgt).hasClass('btn-danger')) {
+        // console.log($(tgtTR[1]))
+        const tgtTR = $(tgt).parentsUntil("tbody")
+        $(tgtTR).remove()
+    } else {
+        // console.log('Not deleting this row...')
+    }
+
 })
 
 const exampleList = [
@@ -154,7 +159,5 @@ const exampleList = [
 
 // write examples from array
 $.each(exampleList, function(index, value){
-    // $("#result").append(index + ": " + value + '<br>');
     $("#exaList").append(`<li>${value}</li>`)
-        console.log(value);
 });

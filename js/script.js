@@ -1,4 +1,8 @@
-let globalData, coinList, coinID, coinData, $newCrypto
+let globalData, coinList, coinID, coinData, coinRow, $newCrypto
+
+// varibles needed for table
+let coinName, coinSymbol, coinUSD, coinMCap, coinATHPercent, coinATH, coinATHDate, coinMarkets
+let btnRow = '<td><button type="button" class="btn btn-danger btn-sm">X</button></td>'
 
 const apiRoot ="https://api.coingecko.com/api/v3/"
 // API Methods
@@ -24,7 +28,7 @@ $('#submitBtn').on('click', function(evt) {
     } else {
         newCrypto = $newCrypto.toUpperCase()
     }
-    console.log($newCrypto);
+    // console.log($newCrypto);
     $('#cryptoInput').prop('value','');
     coinLookUp($newCrypto);
 });
@@ -76,17 +80,17 @@ function numberWithCommas(x) {
 // new coin lookup
 function coinLookUp(token) {
     if (coinList.find((coin) => coin.symbol==token)){
-        console.log(`Found Symbol - ${token}`);
+        // console.log(`Found Symbol - ${token}`);
         // console.log(coinList.find((coin) => coin.symbol==token).id)
         coinID = coinList.find((coin) => coin.symbol==token).id
-        console.log(coinID);
-        getCoinData(coinID);
+        // console.log(coinID);
+        getCoinData(coinID)
     } else if (coinList.find((coin) => coin.name==token)) {
-        console.log(`Name Found - ${token}`);
+        // console.log(`Name Found - ${token}`);
         // console.log(coinList.find((coin) => coin.name==token).id)
         coinID = coinList.find((coin) => coin.name==token).id
-        console.log(coinID);
-        getCoinData(coinID);
+        // console.log(coinID);
+        getCoinData(coinID)
     } else {
         alert(`No Matching Coin Found`)
     };
@@ -99,6 +103,47 @@ function getCoinData(tokenID) {
     }).then(
         (data) => {
             coinData = data;
-            console.log(coinData);
+            // console.log(coinData);
+            createTableRow(coinData)
     });
 }
+
+function createTableRow(coinObj) {
+    // console.log(coinObj);
+    coinName = `<td>` + coinObj.name + `</td>` 
+    // console.log(coinName);
+    coinSymbol = `<td>` + coinObj.symbol.toUpperCase() + `</td>` 
+    coinUSD = `<td>$` + coinObj.market_data.current_price.usd.toFixed(4) + `</td>`
+    coinMCap = `<td>` + coinObj.market_data.market_cap_change_percentage_24h.toFixed(2) + `%</td>` 
+    coinATHPercent = `<td>` + coinObj.market_data.ath_change_percentage.usd.toFixed(2) + `%</td>` 
+    coinATH = `<td>$` + coinObj.market_data.ath.usd.toFixed(4) + `</td>` 
+    coinATHDate = `<td>` + coinObj.market_data.ath_date.usd + `</td>` 
+    coinMarkets = `<td>Test Value</td>` 
+    let tableRow = `<tr>
+                    ${coinName}
+                    ${coinSymbol}
+                    ${coinUSD}
+                    ${coinMCap}
+                    ${coinATHPercent}
+                    ${coinATH}
+                    ${coinATHDate}
+                    ${coinMarkets}
+                    ${btnRow}
+                    </tr>`
+    console.log(tableRow);
+    $("#coinsTable").append(tableRow)
+}
+
+// #coinsTable,  <td><button type="button" class="btn btn-danger btn-sm">X</button></td>
+/* <tr>
+        <th>Name</th>
+        <th>Symbol</th> 
+        <th data-toggle="tooltip" title="Price in USD">USD</th>
+        <th data-toggle="tooltip" title="% of Total Market Cap">%MC</th>
+        <th data-toggle="tooltip" title="Relation to ATH">%ATH</th>
+        <th data-toggle="tooltip" title="All Time High">ATH</th>
+        <th>ATH Date</th>
+        <th>Markets</th>
+    <td><button type="button" class="btn btn-danger btn-sm">X</button></td>
+</tr> */
+

@@ -23,7 +23,7 @@ $('#clearText').on('click',function() {
 // submit button
 $('#submitBtn').on('click', function(evt) {
     $newCrypto = $('#cryptoInput').prop('value');
-    if($newCrypto.length > 3) {
+    if($newCrypto.length > 4) {
         $newCrypto = $newCrypto.charAt(0).toUpperCase() + $newCrypto.slice(1);
     } else {
         newCrypto = $newCrypto.toUpperCase()
@@ -143,3 +143,17 @@ $("#coinsTable").on("click", function (evt) {
     $(tgtTR).remove()
 })
 
+const exampleList = [
+    "Ethereum or ETH",
+    "Cardano or ADA",
+    "Monero or XMR",
+    "Polgon or MATIC",
+    "Dogecoin or DOGE",
+]
+
+// write examples from array
+$.each(exampleList, function(index, value){
+    // $("#result").append(index + ": " + value + '<br>');
+    $("#exaList").append(`<li>${value}</li>`)
+        console.log(value);
+});

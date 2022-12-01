@@ -37,10 +37,15 @@ body {
   color: red;
   font-size: small;
 }
-/* h1 {
-  color: rgb(0,0,0);
+h5 {
+  color: rgb(190, 197, 198);
+  position: relative;
+  left: var(--left-indent);
 }
-p {
-  color: rgb(0,0,0);
-  font-size: medium;
-} */
+ul {
+  color: rgb(190, 197, 198);
+  font-size: 15px;
+  list-style-type: square;
+  position: relative;
+  left: var(--left-indent);
+}

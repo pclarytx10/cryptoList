@@ -66,7 +66,6 @@ $.ajax({
         // console.log(coinList.find((coin) => coin.symbol=="eth"));
 });
 
-
 // code snipet to format market cap
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
@@ -93,7 +92,7 @@ function coinLookUp(token) {
         // console.log(coinID);
         getCoinData(coinID)
     } else {
-        alert(`No matching coin found. If your coin name contains multiple words, try capitalizing the second word or formatting it as it appears on CoinGecko's website. Example: "Binance USD"`)
+        alert(`No matching coin found. If your coin name contains multiple words, try capitalizing the second word or formatting it as it appears on CoinGecko's website. Example: "Binance USD" If you have entered a coin ticker that was not found, please try using the full name of the coin. Example: Polygon instead of MATIC`)
     };
 }
 
@@ -109,22 +108,26 @@ function getCoinData(tokenID) {
     });
 }
 
-const today = new Date().toLocaleDateString('en-GB', {
-    day:   'numeric',
-    month: 'short',
-    year:  'numeric',
-});
-
+function formatCurrency(currency) {
+    if (currency < 0.01) {
+        return currency.toFixed(4)
+    } else if ( currency < 1000) {
+        return currency.toFixed(2)
+    } else {
+        return numberWithCommas(currency.toFixed(2))
+    }
+}
 function createTableRow(coinObj) {
     // console.log(coinObj);
     coinName = `<td>` + coinObj.name + `</td>` 
     // console.log(coinName);
     coinSymbol = `<td>` + coinObj.symbol.toUpperCase() + `</td>` 
-    coinUSD = `<td>$` + numberWithCommas(coinObj.market_data.current_price.usd.toFixed(4)) + `</td>`
+    // coinUSD = `<td>$` + numberWithCommas(coinObj.market_data.current_price.usd.toFixed(4)) + `</td>`
+    coinUSD = `<td>$` + formatCurrency(coinObj.market_data.current_price.usd) + `</td>`
     let marketCap = coinObj.market_data.market_cap.usd / globalMC * 100
     coinMCap = `<td>` + marketCap.toFixed(1) + `%</td>` 
     coinATHPercent = `<td>` + coinObj.market_data.ath_change_percentage.usd.toFixed(2) + `%</td>` 
-    coinATH = `<td>$` + coinObj.market_data.ath.usd.toFixed(4) + `</td>` 
+    coinATH = `<td>$` + formatCurrency(coinObj.market_data.ath.usd) + `</td>` 
     const newDate = new Date(coinObj.market_data.ath_date.usd).toLocaleDateString('en-US', {
     day:   'numeric',
     month: 'short',

@@ -1,12 +1,14 @@
-let globalData, coinList, coinID, $newCrypto
+let globalData, coinList, coinID, coinData, $newCrypto
 
 const apiRoot ="https://api.coingecko.com/api/v3/"
 // API Methods
 const global = 'global' //get cc global data
 const getList = 'coins/list' //list of all supported cc, cache for later queries
+const getCoin = 'coins/' //pull coin info add coin id to string as input
 
 const $ttlCurrencies = $('#ttlCurrencies');
 const $ttlMarketCap = $('#ttlMarketCap');
+const $marketCapChange = $(`#mcChange`);
 
 // clear local storage
 $('#clearText').on('click',function() {
@@ -27,8 +29,6 @@ $('#submitBtn').on('click', function(evt) {
     coinLookUp($newCrypto);
 });
 
-
-
 // getting global market data
 $.ajax({
     url:apiRoot + global
@@ -36,10 +36,12 @@ $.ajax({
     (data) => {
         globalData = data;
         // console.log(globalData);
-        let tempTCC = numberWithCommas(globalData.data.active_cryptocurrencies)
-        let tempTMC = numberWithCommas(globalData.data.total_market_cap.usd.toFixed(0))
+        let tempTCC = numberWithCommas(globalData.data.active_cryptocurrencies);
+        let tempTMC = numberWithCommas(globalData.data.total_market_cap.usd.toFixed(0));
+        let tempMCC = numberWithCommas(globalData.data.market_cap_change_percentage_24h_usd.toFixed(1))
         $ttlCurrencies.text(`${tempTCC}`);
         $ttlMarketCap.text(`$${tempTMC}`);
+        $marketCapChange.text(`${tempMCC}%`);
     }
 );
 
@@ -73,12 +75,25 @@ function coinLookUp(token) {
         // console.log(coinList.find((coin) => coin.symbol==token).id)
         coinID = coinList.find((coin) => coin.symbol==token).id
         console.log(coinID);
+        getCoinData(coinID);
     } else if (coinList.find((coin) => coin.name==token)) {
         console.log(`Name Found - ${token}`);
         // console.log(coinList.find((coin) => coin.name==token).id)
         coinID = coinList.find((coin) => coin.name==token).id
         console.log(coinID);
+        getCoinData(coinID);
     } else {
         alert(`No Matching Coin Found`)
     };
+}
+
+// pull coin information 
+function getCoinData(tokenID) {
+    $.ajax({
+        url:apiRoot + getCoin + tokenID
+    }).then(
+        (data) => {
+            coinData = data;
+            console.log(coinData);
+    });
 }

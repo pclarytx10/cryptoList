@@ -144,11 +144,12 @@ $("#coinsTable").on("click", function (evt) {
 })
 
 const exampleList = [
-    "Ethereum or ETH",
+    "Etherium or ETH",
     "Cardano or ADA",
     "Monero or XMR",
     "Polgon or MATIC",
     "Dogecoin or DOGE",
+    "Tether or TUSD",
 ]
 
 // write examples from array

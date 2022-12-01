@@ -44,6 +44,7 @@ h5 {
 }
 ul {
   color: rgb(190, 197, 198);
+  columns: 3;
   font-size: 15px;
   list-style-type: square;
   position: relative;

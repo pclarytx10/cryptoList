@@ -28,11 +28,13 @@ In this section include the link to your deployed app and any instructions you d
 ### Features:
 --- 
 
-- [ ] User input form
-  - [ ] Currency Name or Symbol
-- [ ] Basic Reporting
-  - [ ] Currency List
-- [ ] AJAX query to CoinGecko
+- [x] User input form
+  - [x] Currency Name or Symbol
+- [x] Basic Reporting
+  - [x] Currency List
+- [x] AJAX query to CoinGecko
+
+### Stretch Goals:
 - [ ] LocalStorage of User Input
   - [ ] Refresh of value on new page load
   

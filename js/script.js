@@ -93,7 +93,7 @@ function coinLookUp(token) {
         // console.log(coinID);
         getCoinData(coinID)
     } else {
-        alert(`No Matching Coin Found`)
+        alert(`No matching coin found. If your coin name contains multiple words, try capitalizing the second word or formatting it as it appears on CoinGecko's website. Example: "Binance USD"`)
     };
 }
 
@@ -109,6 +109,12 @@ function getCoinData(tokenID) {
     });
 }
 
+const today = new Date().toLocaleDateString('en-GB', {
+    day:   'numeric',
+    month: 'short',
+    year:  'numeric',
+});
+
 function createTableRow(coinObj) {
     // console.log(coinObj);
     coinName = `<td>` + coinObj.name + `</td>` 
@@ -119,7 +125,12 @@ function createTableRow(coinObj) {
     coinMCap = `<td>` + marketCap.toFixed(1) + `%</td>` 
     coinATHPercent = `<td>` + coinObj.market_data.ath_change_percentage.usd.toFixed(2) + `%</td>` 
     coinATH = `<td>$` + coinObj.market_data.ath.usd.toFixed(4) + `</td>` 
-    coinATHDate = `<td>` + coinObj.market_data.ath_date.usd + `</td>` 
+    const newDate = new Date(coinObj.market_data.ath_date.usd).toLocaleDateString('en-US', {
+    day:   'numeric',
+    month: 'short',
+    year:  'numeric',
+    });
+    coinATHDate = `<td>` + newDate + `</td>` 
     coinMarkets = `<td>Test Value</td>` 
     let tableRow = `<tr>
                     ${coinName}

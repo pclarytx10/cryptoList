@@ -1,14 +1,5 @@
 let globalData, globalMC, coinList, coinID, coinData, coinMarketData, coinRow, $newCrypto
 
-// logic for testing clients, will delete after resolving safari bug
-// function isMacintosh() {
-//     return navigator.platform.indexOf('Mac') > -1
-//   }
-//   console.log(isMacintosh());
-//   console.log(navigator.userAgent);
-//   // Safari 3.0+ "[object HTMLElementConstructor]" 
-// var isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && window['safari'].pushNotification));
-
 //   $('body').append(`<p>${navigator.platform}, ${isSafari}</p>`)
 
 const apiRoot ="https://api.coingecko.com/api/v3/"
@@ -86,7 +77,7 @@ getCoinData('bitcoin')
 
 // code snipet to format market cap
 function numberWithCommas(x) {
-    return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+    return x.toString().replace('/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g', ",");
 }
 
 // code snipet to prevent page refresh on enter in submit form

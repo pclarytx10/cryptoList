@@ -42,7 +42,17 @@ A live version of this app is hosted on [Github.io.](https://pclarytx10.github.i
   
 ### Future Enhancements:
 
-- [ ] Position Tracking 
+- [ ] Research Tracking
+  - [ ] Research Source
+  - [ ] Research Notes
+  - [ ] Risk Level
+    - [ ] RL Automation (Market Cap, Social Score, Etc.)
+- [ ] Position Tracking
+  - [ ] Exchange or Wallet
+  - [ ] Custodial or Non-Custodial  
+  - [ ] Position Size vs Portfolio
+  - [ ] Risk Level 
+    - [ ] RL Automation (Coin RL, Position Size, Custodial Factors)
 - [ ] Advanced Reporting
   - [ ] Portfolio Sizing
   - [ ] Graphs

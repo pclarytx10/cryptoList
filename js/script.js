@@ -43,7 +43,6 @@ $.ajax({
         // console.log(coinList.find((coin) => coin.symbol=="eth"));
 });
 
-
 // varibles needed for table
 let coinName, coinSymbol, coinUSD, coinChange, coinMCap, coinATHPercent, coinATH, coinATHDate, coinMarkets
 let btnRow = '<td class="dangerBtn"><button type="button" class="btn btn-danger btn-sm">X</button></td>'

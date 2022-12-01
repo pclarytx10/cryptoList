@@ -23,7 +23,7 @@ CryptoList Main Page Wireframe:
 ## Getting Started: 
 --- 
 
-In this section include the link to your deployed app and any instructions you deem important.
+A live version of this app is hosted on [Github.io.](https://pclarytx10.github.io) Example cryptocurrencies have been provided on the landing page. Simply type a coin in the submit box to get started. Added coins may be removed by clicking the remove button on the right hand side of the row.
 
 ### Features:
 --- 
@@ -60,16 +60,16 @@ Position Size Reporting(Future):
 
 Your application must meet these requirements in order to be considered passing:
 
-- [ ] Render an application in the browser (Deployed using GH Pages, Netlify or Vercel).
-- [ ] Built with HTML, CSS & JavaScript (jQuery) and organized into seperate files.
-- [ ]  Have properly indented HTML, CSS & JavaScript.
-- [ ]  Have functions and variables that are named sensibly (nouns make the best variable names and verbs for function names).
-- [ ] Use AJAX to make a request to an external data source like OMDBapi and insert some of the data retrieved into the DOM.
-- [ ] Frequent commits (5 minimum) dating back to the very beginning of the project. Commit messages should be in the present tense. So, for example "adds link", "creates display of API data", or "prepares for deployment".
-- [ ] A README.md file with these sections:
+- [x] Render an application in the browser (Deployed using GH Pages, Netlify or Vercel).
+- [x] Built with HTML, CSS & JavaScript (jQuery) and organized into seperate files.
+- [x]  Have properly indented HTML, CSS & JavaScript.
+- [x]  Have functions and variables that are named sensibly (nouns make the best variable names and verbs for function names).
+- [x] Use AJAX to make a request to an external data source like OMDBapi and insert some of the data retrieved into the DOM.
+- [x] Frequent commits (5 minimum) dating back to the very beginning of the project. Commit messages should be in the present tense. So, for example "adds link", "creates display of API data", or "prepares for deployment".
+- [x] A README.md file with these sections:
   - [x]  <Your app's title>: A description of your app. Background info of the app is a nice touch.
   - [x] Technologies Used: List of the technologies used, e.g., JavaScript, HTML, CSS...
   - [x] Screenshot(s): Images of your actual app.
-  - [ ] Getting Started: In this section include the link to your deployed app and any instructions you deem important.
+  - [x] Getting Started: In this section include the link to your deployed app and any instructions you deem important.
   - [x] Future Enhancements: Features you plan to implement later.
     Note: Don't underestimate the value of a well crafted README.md. 

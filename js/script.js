@@ -113,7 +113,7 @@ function createTableRow(coinObj) {
     coinName = `<td>` + coinObj.name + `</td>` 
     // console.log(coinName);
     coinSymbol = `<td>` + coinObj.symbol.toUpperCase() + `</td>` 
-    coinUSD = `<td>$` + coinObj.market_data.current_price.usd.toFixed(4) + `</td>`
+    coinUSD = `<td>$` + numberWithCommas(coinObj.market_data.current_price.usd.toFixed(4)) + `</td>`
     coinMCap = `<td>` + coinObj.market_data.market_cap_change_percentage_24h.toFixed(2) + `%</td>` 
     coinATHPercent = `<td>` + coinObj.market_data.ath_change_percentage.usd.toFixed(2) + `%</td>` 
     coinATH = `<td>$` + coinObj.market_data.ath.usd.toFixed(4) + `</td>` 
@@ -144,7 +144,7 @@ $("#coinsTable").on("click", function (evt) {
 })
 
 const exampleList = [
-    "Etherium or ETH",
+    "Ethereum or ETH",
     "Cardano or ADA",
     "Monero or XMR",
     "Polgon or MATIC",

@@ -1,9 +1,5 @@
 let globalData, globalMC, coinList, coinID, coinData, coinMarketData, coinRow, $newCrypto
 
-// varibles needed for table
-let coinName, coinSymbol, coinUSD, coinMCap, coinATHPercent, coinATH, coinATHDate, coinMarkets
-let btnRow = '<td><button type="button" class="btn btn-danger btn-sm">X</button></td>'
-
 const apiRoot ="https://api.coingecko.com/api/v3/"
 // API Methods
 const global = 'global' //get cc global data
@@ -13,25 +9,6 @@ const getCoin = 'coins/' //pull coin info add coin id to string as input
 const $ttlCurrencies = $('#ttlCurrencies');
 const $ttlMarketCap = $('#ttlMarketCap');
 const $marketCapChange = $(`#mcChange`);
-
-// clear local storage
-$('#clearText').on('click',function() {
-    //your javacript
-    console.log("Clear local storage")
-});
-
-// submit button
-$('#submitBtn').on('click', function(evt) {
-    $newCrypto = $('#cryptoInput').prop('value');
-    if($newCrypto.length > 4) {
-        $newCrypto = $newCrypto.charAt(0).toUpperCase() + $newCrypto.slice(1);
-    } else {
-        newCrypto = $newCrypto.toUpperCase()
-    }
-    // console.log($newCrypto);
-    $('#cryptoInput').prop('value','');
-    coinLookUp($newCrypto);
-});
 
 // getting global market data
 $.ajax({
@@ -65,6 +42,36 @@ $.ajax({
         // console.log(coinList[0]);
         // console.log(coinList.find((coin) => coin.symbol=="eth"));
 });
+
+
+// varibles needed for table
+let coinName, coinSymbol, coinUSD, coinMCap, coinATHPercent, coinATH, coinATHDate, coinMarkets
+let btnRow = '<td class="dangerBtn"><button type="button" class="btn btn-danger btn-sm">X</button></td>'
+
+// clear local storage
+$('#clearText').on('click',function() {
+    //your javacript
+    console.log("Clear local storage")
+});
+
+// submit button
+$('#submitBtn').on('click', function(evt) {
+    $newCrypto = $('#cryptoInput').prop('value');
+    if($newCrypto.length > 4) {
+        $newCrypto = $newCrypto.charAt(0).toUpperCase() + $newCrypto.slice(1);
+    } else {
+        newCrypto = $newCrypto.toUpperCase()
+    }
+    // console.log($newCrypto);
+    $('#cryptoInput').prop('value','');
+    coinLookUp($newCrypto);
+    console.log($newCrypto);
+});
+
+// create btc row
+getCoinData('bitcoin')
+
+// $('.btn-danger').remove()
 
 // code snipet to format market cap
 function numberWithCommas(x) {
@@ -164,7 +171,6 @@ function getMarketData(objIn) {
 
 function createTableRow(coinObj) {
     getMarketData(coinObj.tickers);
-    console.log(selectMarkets);
     coinName = `<td>` + coinObj.name + `</td>`;
     coinSymbol = `<td>` + coinObj.symbol.toUpperCase() + `</td>`; 
     coinUSD = `<td>$` + formatCurrency(coinObj.market_data.current_price.usd) + `</td>`;
@@ -193,6 +199,9 @@ function createTableRow(coinObj) {
     // console.log(tableRow);
     $("#coinsTable").append(tableRow)
     testRowStyling()
+    if (coinObj.name === 'Bitcoin') {
+        $('.dangerBtn').remove();
+    }
 }
 
 // add an event listener for "#coinsTable" remove button

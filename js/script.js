@@ -1,4 +1,4 @@
-let globalData, coinList, $newCrypto
+let globalData, coinList, coinID, $newCrypto
 
 const apiRoot ="https://api.coingecko.com/api/v3/"
 // API Methods
@@ -8,21 +8,26 @@ const getList = 'coins/list' //list of all supported cc, cache for later queries
 const $ttlCurrencies = $('#ttlCurrencies');
 const $ttlMarketCap = $('#ttlMarketCap');
 
+// clear local storage
 $('#clearText').on('click',function() {
     //your javacript
     console.log("Clear local storage")
 });
 
+// submit button
 $('#submitBtn').on('click', function(evt) {
     $newCrypto = $('#cryptoInput').prop('value');
+    if($newCrypto.length > 3) {
+        $newCrypto = $newCrypto.charAt(0).toUpperCase() + $newCrypto.slice(1);
+    } else {
+        newCrypto = $newCrypto.toUpperCase()
+    }
     console.log($newCrypto);
     $('#cryptoInput').prop('value','');
+    coinLookUp($newCrypto);
 });
 
-// code snipet to format market cap
-const numberWithCommas = (x) => {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-}
+
 
 // getting global market data
 $.ajax({
@@ -50,3 +55,30 @@ $.ajax({
 });
 
 
+// code snipet to format market cap
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+}
+
+// code snipet to prevent page refresh on enter in submit form
+// need to fix this so enter acts the same as button click
+// $(function() {
+//     $("form").submit(function() { return false; });
+// });
+
+// new coin lookup
+function coinLookUp(token) {
+    if (coinList.find((coin) => coin.symbol==token)){
+        console.log(`Found Symbol - ${token}`);
+        // console.log(coinList.find((coin) => coin.symbol==token).id)
+        coinID = coinList.find((coin) => coin.symbol==token).id
+        console.log(coinID);
+    } else if (coinList.find((coin) => coin.name==token)) {
+        console.log(`Name Found - ${token}`);
+        // console.log(coinList.find((coin) => coin.name==token).id)
+        coinID = coinList.find((coin) => coin.name==token).id
+        console.log(coinID);
+    } else {
+        alert(`No Matching Coin Found`)
+    };
+}

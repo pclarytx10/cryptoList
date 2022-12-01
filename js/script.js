@@ -1,7 +1,5 @@
 let globalData, globalMC, coinList, coinID, coinData, coinMarketData, coinRow, $newCrypto
 
-//   $('body').append(`<p>${navigator.platform}, ${isSafari}</p>`)
-
 const apiRoot ="https://api.coingecko.com/api/v3/"
 // API Methods
 const global = 'global' //get cc global data
@@ -47,7 +45,7 @@ $.ajax({
 
 
 // varibles needed for table
-let coinName, coinSymbol, coinUSD, coinMCap, coinATHPercent, coinATH, coinATHDate, coinMarkets
+let coinName, coinSymbol, coinUSD, coinChange, coinMCap, coinATHPercent, coinATH, coinATHDate, coinMarkets
 let btnRow = '<td class="dangerBtn"><button type="button" class="btn btn-danger btn-sm">X</button></td>'
 
 // clear local storage
@@ -124,13 +122,15 @@ function formatCurrency(currency) {
 function testRowStyling() {
     rowArray = $('.athPer')
     $.each(rowArray, function(index, value){
-        rowVal = rowArray[index].innerText.slice(0, -1); 
+        rowVal = rowArray[index].innerText
+        rovVal = rowVal.slice(0, -1); 
         if (rowVal > 0) {
             rowArray.attr('style','color:green;')
         } else {
             rowArray.attr('style','color:red;')
         };
     });
+    
 }
 //test on load, also test when new row is created in createTableRow
 testRowStyling()
@@ -176,9 +176,11 @@ function createTableRow(coinObj) {
     coinName = `<td>` + coinObj.name + `</td>`;
     coinSymbol = `<td>` + coinObj.symbol.toUpperCase() + `</td>`; 
     coinUSD = `<td>$` + formatCurrency(coinObj.market_data.current_price.usd) + `</td>`;
+    // console.log(coinObj.market_data.price_change_percentage_24h);
+    coinChange = `<td class="athPer">` + coinObj.market_data.price_change_percentage_24h.toFixed(1) + `%</td>`
     let marketCap = coinObj.market_data.market_cap.usd / globalMC * 100
     coinMCap = `<td>` + marketCap.toFixed(1) + `%</td>`; 
-    coinATHPercent = `<td class="athPer">` + coinObj.market_data.ath_change_percentage.usd.toFixed(2) + `</td>`;
+    coinATHPercent = `<td class="athPer">` + coinObj.market_data.ath_change_percentage.usd.toFixed(1) + `%</td>`;
     coinATH = `<td>$` + formatCurrency(coinObj.market_data.ath.usd) + `</td>`;
     const newDate = new Date(coinObj.market_data.ath_date.usd).toLocaleDateString('en-US', {
     day:   'numeric',
@@ -191,9 +193,10 @@ function createTableRow(coinObj) {
                     ${coinName}
                     ${coinSymbol}
                     ${coinUSD}
+                    ${coinChange}
                     ${coinMCap}
-                    ${coinATHPercent}
                     ${coinATH}
+                    ${coinATHPercent}
                     ${coinATHDate}
                     ${coinMarkets}
                     ${btnRow}

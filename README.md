@@ -35,6 +35,8 @@ A live version of this app is hosted on [Github.io.](https://pclarytx10.github.i
 - [x] AJAX query to CoinGecko
 
 ### Stretch Goals:
+
+- [ ] Add Coin Image to Table Row
 - [ ] LocalStorage of User Input
   - [ ] Refresh of value on new page load
   

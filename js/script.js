@@ -1,4 +1,4 @@
-let globalData, coinList, coinID, coinData, coinRow, $newCrypto
+let globalData, globalMC, coinList, coinID, coinData, coinRow, $newCrypto
 
 // varibles needed for table
 let coinName, coinSymbol, coinUSD, coinMCap, coinATHPercent, coinATH, coinATHDate, coinMarkets
@@ -42,7 +42,8 @@ $.ajax({
         // console.log(globalData);
         let tempTCC = numberWithCommas(globalData.data.active_cryptocurrencies);
         let tempTMC = numberWithCommas(globalData.data.total_market_cap.usd.toFixed(0));
-        let tempMCC = numberWithCommas(globalData.data.market_cap_change_percentage_24h_usd.toFixed(1))
+        globalMC = globalData.data.total_market_cap.usd.toFixed(0);
+        let tempMCC = numberWithCommas(globalData.data.market_cap_change_percentage_24h_usd.toFixed(1));
         $ttlCurrencies.text(`${tempTCC}`);
         $ttlMarketCap.text(`$${tempTMC}`);
         $marketCapChange.text(`${tempMCC}%`);
@@ -114,7 +115,8 @@ function createTableRow(coinObj) {
     // console.log(coinName);
     coinSymbol = `<td>` + coinObj.symbol.toUpperCase() + `</td>` 
     coinUSD = `<td>$` + numberWithCommas(coinObj.market_data.current_price.usd.toFixed(4)) + `</td>`
-    coinMCap = `<td>` + coinObj.market_data.market_cap_change_percentage_24h.toFixed(2) + `%</td>` 
+    let marketCap = coinObj.market_data.market_cap.usd / globalMC * 100
+    coinMCap = `<td>` + marketCap.toFixed(1) + `%</td>` 
     coinATHPercent = `<td>` + coinObj.market_data.ath_change_percentage.usd.toFixed(2) + `%</td>` 
     coinATH = `<td>$` + coinObj.market_data.ath.usd.toFixed(4) + `</td>` 
     coinATHDate = `<td>` + coinObj.market_data.ath_date.usd + `</td>` 

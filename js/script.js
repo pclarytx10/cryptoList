@@ -108,6 +108,7 @@ function getCoinData(tokenID) {
     });
 }
 
+// table creation and styling
 function formatCurrency(currency) {
     if (currency < 0.01) {
         return currency.toFixed(4)
@@ -117,6 +118,25 @@ function formatCurrency(currency) {
         return numberWithCommas(currency.toFixed(2))
     }
 }
+
+function testRowStyling() {
+    rowArray = $('.athPer')
+    $.each(rowArray, function(index, value){
+        rowVal = rowArray[index].innerText.slice(0, -1); 
+        console.log(rowVal);
+        if (rowVal > 0) {
+            rowArray.attr('style','color:green;')
+        } else {
+            rowArray.attr('style','color:red;')
+        };
+    });
+
+}
+//test on load, also test when new row is created in createTableRow
+testRowStyling()
+
+// console.log($('.athPer').attr('style','color:red;'));
+
 function createTableRow(coinObj) {
     // console.log(coinObj);
     coinName = `<td>` + coinObj.name + `</td>` 
@@ -126,7 +146,7 @@ function createTableRow(coinObj) {
     coinUSD = `<td>$` + formatCurrency(coinObj.market_data.current_price.usd) + `</td>`
     let marketCap = coinObj.market_data.market_cap.usd / globalMC * 100
     coinMCap = `<td>` + marketCap.toFixed(1) + `%</td>` 
-    coinATHPercent = `<td>` + coinObj.market_data.ath_change_percentage.usd.toFixed(2) + `%</td>` 
+    coinATHPercent = `<td class="athPer">` + coinObj.market_data.ath_change_percentage.usd.toFixed(2) + `</td>`
     coinATH = `<td>$` + formatCurrency(coinObj.market_data.ath.usd) + `</td>` 
     const newDate = new Date(coinObj.market_data.ath_date.usd).toLocaleDateString('en-US', {
     day:   'numeric',
@@ -148,6 +168,7 @@ function createTableRow(coinObj) {
                     </tr>`
     // console.log(tableRow);
     $("#coinsTable").append(tableRow)
+    testRowStyling()
 }
 
 // add an event listener for "#coinsTable" remove button

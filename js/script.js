@@ -134,16 +134,12 @@ function createTableRow(coinObj) {
     $("#coinsTable").append(tableRow)
 }
 
-// #coinsTable,  <td><button type="button" class="btn btn-danger btn-sm">X</button></td>
-/* <tr>
-        <th>Name</th>
-        <th>Symbol</th> 
-        <th data-toggle="tooltip" title="Price in USD">USD</th>
-        <th data-toggle="tooltip" title="% of Total Market Cap">%MC</th>
-        <th data-toggle="tooltip" title="Relation to ATH">%ATH</th>
-        <th data-toggle="tooltip" title="All Time High">ATH</th>
-        <th>ATH Date</th>
-        <th>Markets</th>
-    <td><button type="button" class="btn btn-danger btn-sm">X</button></td>
-</tr> */
+// add an event listener for "#coinsTable" remove button
+$("#coinsTable").on("click", function (evt) {
+    // console.log("Gonna Delete Somethnig....")
+    const tgt = evt.target
+    const tgtTR = $(tgt).parentsUntil("tbody")
+    console.log($(tgtTR[1]))
+    $(tgtTR).remove()
+})
 

@@ -64,8 +64,27 @@ $('#submitBtn').on('click', function(evt) {
     // console.log($newCrypto);
     $('#cryptoInput').prop('value','');
     coinLookUp($newCrypto);
-    console.log($newCrypto);
+    // console.log($newCrypto);
 });
+
+// accept input on enter keypress in input form
+$("form").on('keydown', function(evt) {
+    const tgt = evt.keyCode
+    console.log(tgt);
+    if (tgt === 13) {
+        // console.log("Enter was pressed");
+        $newCrypto = $('#cryptoInput').prop('value');
+        if($newCrypto.length > 4) {
+            $newCrypto = $newCrypto.charAt(0).toUpperCase() + $newCrypto.slice(1);
+        } else {
+            newCrypto = $newCrypto.toUpperCase()
+        }
+        $('#cryptoInput').prop('value','');
+        coinLookUp($newCrypto);
+        // console.log($newCrypto);
+    } else {}
+    
+  });
 
 // create btc row
 getCoinData('bitcoin')

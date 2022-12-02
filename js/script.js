@@ -18,9 +18,9 @@ $.ajax({
         globalData = data;
         // console.log(globalData);
         let tempTCC = numberWithCommas(globalData.data.active_cryptocurrencies);
-        let tempTMC = numberWithCommas(globalData.data.total_market_cap.usd.toFixed(0));
         globalMC = globalData.data.total_market_cap.usd.toFixed(0);
-        let tempMCC = numberWithCommas(globalData.data.market_cap_change_percentage_24h_usd.toFixed(1));
+        let tempTMC = numberWithCommas(globalMC);
+        let tempMCC = globalData.data.market_cap_change_percentage_24h_usd.toFixed(1);
         $ttlCurrencies.text(`${tempTCC}`);
         $ttlMarketCap.text(`$${tempTMC}`);
         $marketCapChange.text(`${tempMCC}%`);
@@ -70,7 +70,7 @@ $('#submitBtn').on('click', function(evt) {
 // accept input on enter keypress in input form
 $("form").on('keydown', function(evt) {
     const tgt = evt.keyCode
-    console.log(tgt);
+    // console.log(tgt);
     if (tgt === 13) {
         // console.log("Enter was pressed");
         $newCrypto = $('#cryptoInput').prop('value');
@@ -93,14 +93,10 @@ getCoinData('bitcoin')
 
 // code snipet to format market cap
 function numberWithCommas(x) {
-    return x.toString().replace('/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g', ",");
+    var parts = x.toString().split(".");
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return parts.join(".");
 }
-
-// code snipet to prevent page refresh on enter in submit form
-// need to fix this so enter acts the same as button click
-// $(function() {
-//     $("form").submit(function() { return false; });
-// });
 
 // new coin lookup
 function coinLookUp(token) {
@@ -134,6 +130,7 @@ function formatCurrency(currency) {
         return currency.toFixed(2)
     } else {
         return numberWithCommas(currency.toFixed(2))
+        // return currency.toFixed(2)
     }
 }
 
@@ -185,8 +182,6 @@ function getMarketData(objIn) {
     if (marketsArray.includes('Uniswap (v2)')) {
         selectMarkets.push('Uniswap')
     };
-  
-    // console.log(selectMarkets);
 }
 
 function createTableRow(coinObj) {

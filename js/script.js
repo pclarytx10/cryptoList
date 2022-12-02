@@ -44,13 +44,13 @@ $.ajax({
 });
 
 // varibles needed for table
-let coinName, coinSymbol, coinUSD, coinChange, coinMCap, coinATHPercent, coinATH, coinATHDate, coinMarkets
+let coinName, coinSymbol, coinUSD, coinChange, coinMCap, coinATHPercent, coinATH, coinATHDate, coinMarkets, coinImage
 let btnRow = '<td class="dangerBtn"><button type="button" class="btn btn-danger btn-sm">X</button></td>'
 
 // clear local storage
 $('#clearText').on('click',function() {
     //your javacript
-    console.log("Clear local storage")
+    alert("Clear local storage")
 });
 
 // submit button
@@ -60,7 +60,7 @@ $('#submitBtn').on('click', function(evt) {
         $newCrypto = $newCrypto.charAt(0).toUpperCase() + $newCrypto.slice(1);
     } else {
         $newCrypto = $newCrypto.toLowerCase()
-        console.log($newCrypto);
+        // console.log($newCrypto);
     }
     $('#cryptoInput').prop('value','');
     coinLookUp($newCrypto);
@@ -188,7 +188,9 @@ function getMarketData(objIn) {
 
 function createTableRow(coinObj) {
     getMarketData(coinObj.tickers);
-    coinName = `<td>` + coinObj.name + `</td>`;
+    coinImage = `<img src="${coinObj.image.small}" width="20px" alt="${coinObj.name}" style="margin-right: 3px"></img>`
+    console.log(coinImage);
+    coinName = `<td>` + coinImage + coinObj.name + `</td>`;
     coinSymbol = `<td>` + coinObj.symbol.toUpperCase() + `</td>`; 
     coinUSD = `<td>$` + formatCurrency(coinObj.market_data.current_price.usd) + `</td>`;
     // console.log(coinObj.market_data.price_change_percentage_24h);

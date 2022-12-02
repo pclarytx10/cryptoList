@@ -118,7 +118,7 @@ getCoinData('bitcoin')
 // load userTokens from localStorage
 if (localStorage.getItem("storedTokens") !== null && localStorage.getItem("storedTokens").length > 0) {
     userTokens = JSON.parse(localStorage.getItem("storedTokens"));
-    console.log(JSON.parse(localStorage.getItem("storedTokens")));
+    // console.log(JSON.parse(localStorage.getItem("storedTokens")));
     $.each(userTokens, function(idx, value){
         getCoinData(value);
     });
@@ -150,16 +150,31 @@ function coinLookUp(token) {
     };
 }
 
+// existing coin lookup and delete
+function localLookUp(token) {
+    coinID = coinList.find((coin) => coin.name==token).id;
+    // console.log(`${token}, ${coinID}`);
+    tokenDrop(coinID);
+}
+
 // sync localStorage and userTokens
 function tokenStore(token) {
-    userTokens.push(coinID);
-    // console.log(`storing ${token} to localStorage`);
+    userTokens.push(token);
     localStorage.setItem("storedTokens", JSON.stringify(userTokens));
 }
-// function tokenDrop(token) {
-//     userTokens.pop(coinID);
-//     localStorage.setItem("storedTokens", JSON.stringify(userTokens));
-// }
+
+function tokenDrop(token) {
+    console.log(`Dropping ${token}`);
+    // userTokens.filter(coin => coin != token);
+    let tokenIdx = userTokens.findIndex(coin => coin == token);
+    for( var i = 0; i < userTokens.length; i++){   
+        if ( userTokens[i] === token) { 
+            userTokens.splice(i, 1); 
+        }
+    };
+    localStorage.setItem("storedTokens", JSON.stringify(userTokens));
+    console.log(userTokens);
+}
 
 // pull coin information 
 function getCoinData(tokenID) {
@@ -237,7 +252,7 @@ function getMarketData(objIn) {
 function createTableRow(coinObj) {
     getMarketData(coinObj.tickers);
     coinImage = `<img src="${coinObj.image.small}" width="20px" alt="${coinObj.name}" style="margin-right: 3px"></img>`
-    coinName = `<td>` + coinImage + coinObj.name + `</td>`;
+    coinName = `<td class="ccName">` + coinImage + coinObj.name + `</td>`;
     coinSymbol = `<td>` + coinObj.symbol.toUpperCase() + `</td>`; 
     coinUSD = `<td>$` + formatCurrency(coinObj.market_data.current_price.usd) + `</td>`;
     // console.log(coinObj.market_data.price_change_percentage_24h);
@@ -253,35 +268,46 @@ function createTableRow(coinObj) {
     });
     coinATHDate = `<td>` + newDate + `</td>`; 
     coinMarkets = `<td>${selectMarkets.join(', ')}</td>`; 
-    let tableRow = `<tr>
-                    ${coinName}
-                    ${coinSymbol}
-                    ${coinUSD}
-                    ${coinChange}
-                    ${coinMCap}
-                    ${coinATH}
-                    ${coinATHPercent}
-                    ${coinATHDate}
-                    ${coinMarkets}
-                    ${btnRow}
-                    </tr>`
-    // console.log(tableRow);
+    let tableRow = ""
+    if (coinObj.name === 'Bitcoin') {
+        // $('.dangerBtn').remove();
+        tableRow = `<tr>
+        ${coinName}
+        ${coinSymbol}
+        ${coinUSD}
+        ${coinChange}
+        ${coinMCap}
+        ${coinATH}
+        ${coinATHPercent}
+        ${coinATHDate}
+        ${coinMarkets}
+        </tr>`
+    } else {
+        tableRow = `<tr class="tableRow">
+        ${coinName}
+        ${coinSymbol}
+        ${coinUSD}
+        ${coinChange}
+        ${coinMCap}
+        ${coinATH}
+        ${coinATHPercent}
+        ${coinATHDate}
+        ${coinMarkets}
+        ${btnRow}
+        </tr>`
+    }
     $("#coinsTable").append(tableRow)
     testRowStyling()
-    if (coinObj.name === 'Bitcoin') {
-        $('.dangerBtn').remove();
-    }
 }
 
 // add an event listener for "#coinsTable" remove button
-$("#coinsTable").on("click", function (evt) {
+$("#coinsTable").on("click", ".btn-danger", function (evt) {
     // console.log("Gonna Delete Somethnig....")
-    const tgt = evt.target
-    if($(tgt).hasClass('btn-danger')) {
-        // console.log($(tgtTR[1]))
-        const tgtTR = $(tgt).parentsUntil("tbody")
-        $(tgtTR).remove()
-    } else {}
+    const tgt = evt.target;
+    const tgtCoin = $(tgt).parentsUntil("tbody").find(".ccName").prop("innerText");
+    localLookUp(tgtCoin);
+    const tgtTR = $(tgt).parentsUntil("tbody");
+    $(tgtTR).remove();
 
 })
 

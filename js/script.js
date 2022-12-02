@@ -166,7 +166,7 @@ function tokenStore(token) {
 function tokenDrop(token) {
     console.log(`Dropping ${token}`);
     // userTokens.filter(coin => coin != token);
-    let tokenIdx = userTokens.findIndex(coin => coin == token);
+    // let tokenIdx = userTokens.findIndex(coin => coin == token);
     for( var i = 0; i < userTokens.length; i++){   
         if ( userTokens[i] === token) { 
             userTokens.splice(i, 1); 

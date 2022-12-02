@@ -56,12 +56,12 @@ $('#clearText').on('click',function() {
 // submit button
 $('#submitBtn').on('click', function(evt) {
     $newCrypto = $('#cryptoInput').prop('value');
-    if($newCrypto.length > 4) {
+    if($newCrypto.length > 5) {
         $newCrypto = $newCrypto.charAt(0).toUpperCase() + $newCrypto.slice(1);
     } else {
-        newCrypto = $newCrypto.toUpperCase()
+        $newCrypto = $newCrypto.toLowerCase()
+        console.log($newCrypto);
     }
-    // console.log($newCrypto);
     $('#cryptoInput').prop('value','');
     coinLookUp($newCrypto);
     // console.log($newCrypto);
@@ -74,10 +74,10 @@ $("form").on('keydown', function(evt) {
     if (tgt === 13) {
         // console.log("Enter was pressed");
         $newCrypto = $('#cryptoInput').prop('value');
-        if($newCrypto.length > 4) {
+        if($newCrypto.length > 5) {
             $newCrypto = $newCrypto.charAt(0).toUpperCase() + $newCrypto.slice(1);
         } else {
-            newCrypto = $newCrypto.toUpperCase()
+            $newCrypto = $newCrypto.toLowerCase()
         }
         $('#cryptoInput').prop('value','');
         coinLookUp($newCrypto);

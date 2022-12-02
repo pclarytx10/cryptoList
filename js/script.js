@@ -1,4 +1,5 @@
-let globalData, globalMC, coinList, coinID, coinData, coinMarketData, coinRow, $newCrypto, storedDate
+let globalData, globalMC, coinList, coinID, coinData, coinMarketData, coinRow, $newCrypto, storedDate 
+let userTokens = []
 
 const apiRoot ="https://api.coingecko.com/api/v3/"
 // API Methods
@@ -8,7 +9,7 @@ const getCoin = 'coins/' //pull coin info add coin id to string as input
 
 // localStorage functions
 // localStorage.setItem("cryptoList", JSON.stringify(coinList));
-// const userTokens = localStorage.setItem("lsTokens", JSON.stringify(lsTokens));
+// localStorage.setItem("storedTokens", JSON.stringify(userTokens));
 
 const $ttlCurrencies = $('#ttlCurrencies');
 const $ttlMarketCap = $('#ttlMarketCap');
@@ -41,7 +42,7 @@ storedDate = new Date(localStorage.getItem("listDate"))
 
 if (checkElapsedTime() > 24){
     callListAPI()
-} else if (localStorage.getItem("cryptoList") !== null && JSON.parse(localStorage.getItem("cryptoList")).length > 0) {
+} else if (localStorage.getItem("cryptoList") !== null && localStorage.getItem("cryptoList").length > 0) {
     coinList = JSON.parse(localStorage.getItem("cryptoList"));
     storedDate = new Date(localStorage.getItem("listDate"))
     console.log('list exists, cache from local');
@@ -109,11 +110,21 @@ $("form").on('keydown', function(evt) {
         $('#cryptoInput').prop('value','');
         coinLookUp($newCrypto);
     } else {}
-    
   });
 
 // create btc row
 getCoinData('bitcoin')
+
+// load userTokens from localStorage
+if (localStorage.getItem("storedTokens") !== null && localStorage.getItem("storedTokens").length > 0) {
+    userTokens = JSON.parse(localStorage.getItem("storedTokens"));
+    console.log(JSON.parse(localStorage.getItem("storedTokens")));
+    $.each(userTokens, function(idx, value){
+        getCoinData(value);
+    });
+} else {
+    localStorage.setItem("storedTokens","");
+}
 
 // code snipet to format market cap
 function numberWithCommas(x) {
@@ -128,14 +139,27 @@ function coinLookUp(token) {
         alert('The token you have entered returns more than one cryptocurrency. Please enter the name of the token instead.')
     } else if (coinList.find((coin) => coin.symbol==token)){
         coinID = coinList.find((coin) => coin.symbol==token).id
-        getCoinData(coinID)
+        getCoinData(coinID);
+        tokenStore(coinID);
     } else if (coinList.find((coin) => coin.name==token)) {
         coinID = coinList.find((coin) => coin.name==token).id
-        getCoinData(coinID)
+        getCoinData(coinID);
+        tokenStore(coinID);
     } else {
         alert(`No matching coin found. If your coin name contains multiple words, try capitalizing the second word or formatting it as it appears on CoinGecko's website. Example: "Binance USD" If you have entered a coin ticker that was not found, please try using the full name of the coin. Example: Polygon instead of MATIC`)
     };
 }
+
+// sync localStorage and userTokens
+function tokenStore(token) {
+    userTokens.push(coinID);
+    // console.log(`storing ${token} to localStorage`);
+    localStorage.setItem("storedTokens", JSON.stringify(userTokens));
+}
+// function tokenDrop(token) {
+//     userTokens.pop(coinID);
+//     localStorage.setItem("storedTokens", JSON.stringify(userTokens));
+// }
 
 // pull coin information 
 function getCoinData(tokenID) {
@@ -185,6 +209,7 @@ const usApprovedExchanges = [
     "Gemini",
     "Binance US",
 ]
+
 //  coinMarketData
 function getMarketData(objIn) {
     coinMarketData = objIn

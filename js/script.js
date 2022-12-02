@@ -100,7 +100,9 @@ function numberWithCommas(x) {
 
 // new coin lookup
 function coinLookUp(token) {
-    if (coinList.find((coin) => coin.symbol==token)){
+    if(coinList.filter((coin) => coin.symbol==token).length > 1 || token === 'sand') {
+        alert('The token you have entered returns more than one cryptocurrency. Please enter the name of the token instead.')
+    } else if (coinList.find((coin) => coin.symbol==token)){
         coinID = coinList.find((coin) => coin.symbol==token).id
         getCoinData(coinID)
     } else if (coinList.find((coin) => coin.name==token)) {

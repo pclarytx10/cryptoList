@@ -37,6 +37,7 @@ A live version of this app is hosted on [Github.io.](https://pclarytx10.github.i
 ### Stretch Goals:
 
 - [ ] Add Coin Image to Table Row
+- [ ] Add logic to test for all "Approved US Markets"
 - [ ] LocalStorage of User Input
   - [ ] Refresh of value on new page load
   

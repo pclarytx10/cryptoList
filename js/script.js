@@ -1,10 +1,14 @@
-let globalData, globalMC, coinList, coinID, coinData, coinMarketData, coinRow, $newCrypto
+let globalData, globalMC, coinList, coinID, coinData, coinMarketData, coinRow, $newCrypto, storedDate
 
 const apiRoot ="https://api.coingecko.com/api/v3/"
 // API Methods
 const global = 'global' //get cc global data
 const getList = 'coins/list' //list of all supported cc, cache for later queries
 const getCoin = 'coins/' //pull coin info add coin id to string as input
+
+// localStorage functions
+// localStorage.setItem("cryptoList", JSON.stringify(coinList));
+// const userTokens = localStorage.setItem("lsTokens", JSON.stringify(lsTokens));
 
 const $ttlCurrencies = $('#ttlCurrencies');
 const $ttlMarketCap = $('#ttlMarketCap');
@@ -32,16 +36,39 @@ $.ajax({
     }
 );
 
-// cache coin data for lookup 
-$.ajax({
-    url:apiRoot + getList
-}).then(
-    (data) => {
-        coinList = data;
-        // array of coin objects, symbols are lower case, names are capitalized
-        // console.log(coinList[0]);
-        // console.log(coinList.find((coin) => coin.symbol=="eth"));
-});
+// check localStorage for cached coin data
+if (localStorage.getItem("cryptoList") !== null && JSON.parse(localStorage.getItem("cryptoList")).length > 0) {
+    coinList = JSON.parse(localStorage.getItem("cryptoList"));
+    storedDate = new Date(localStorage.getItem("listDate"))
+    console.log('list exists, cache from local');
+} else {
+    // cache coin data to memory for lookup 
+    $.ajax({
+        url:apiRoot + getList
+    }).then(
+        (data) => {
+            coinList = data;
+            // push new list and timestamp to localStorage
+            localStorage.setItem("cryptoList", JSON.stringify(coinList));
+            localStorage.setItem("listDate",Date())
+            storedDate = new Date(localStorage.getItem("listDate"))
+            console.log('list cached from API');
+    });
+}
+
+
+function printElapsedTime() {
+    const startTime = storedDate.getTime();
+    let result = ''
+    const endTime = Date.now();
+  
+    // console.log(`Elapsed time: ${String(endTime - startTime)} milliseconds`);
+    minutes = (endTime - startTime) / 60000
+    hours = (endTime - startTime) / 3600000
+    // console.log(`${hours} hours, ${minutes} minutes`);
+    return minutes;
+  }
+//   console.log(printElapsedTime())
 
 // varibles needed for table
 let coinName, coinSymbol, coinUSD, coinChange, coinMCap, coinATHPercent, coinATH, coinATHDate, coinMarkets, coinImage
@@ -49,8 +76,8 @@ let btnRow = '<td class="dangerBtn"><button type="button" class="btn btn-danger 
 
 // clear local storage
 $('#clearText').on('click',function() {
-    //your javacript
     alert("Clear local storage")
+    localStorage.clear();
 });
 
 // submit button
@@ -60,19 +87,15 @@ $('#submitBtn').on('click', function(evt) {
         $newCrypto = $newCrypto.charAt(0).toUpperCase() + $newCrypto.slice(1);
     } else {
         $newCrypto = $newCrypto.toLowerCase()
-        // console.log($newCrypto);
     }
     $('#cryptoInput').prop('value','');
     coinLookUp($newCrypto);
-    // console.log($newCrypto);
 });
 
 // accept input on enter keypress in input form
 $("form").on('keydown', function(evt) {
     const tgt = evt.keyCode
-    // console.log(tgt);
     if (tgt === 13) {
-        // console.log("Enter was pressed");
         $newCrypto = $('#cryptoInput').prop('value');
         if($newCrypto.length > 5) {
             $newCrypto = $newCrypto.charAt(0).toUpperCase() + $newCrypto.slice(1);
@@ -81,15 +104,12 @@ $("form").on('keydown', function(evt) {
         }
         $('#cryptoInput').prop('value','');
         coinLookUp($newCrypto);
-        // console.log($newCrypto);
     } else {}
     
   });
 
 // create btc row
 getCoinData('bitcoin')
-
-// $('.btn-danger').remove()
 
 // code snipet to format market cap
 function numberWithCommas(x) {
@@ -172,7 +192,6 @@ function getMarketData(objIn) {
     $.each(coinMarketData, function(index, value){
         marketsArray.push(coinMarketData[index].market.name)
         marketsArray = marketsArray.filter(unique)
-        // console.log(marketsArray);
     });
     
     if (marketsArray.includes('Coinbase Exchange')) {
@@ -189,7 +208,6 @@ function getMarketData(objIn) {
 function createTableRow(coinObj) {
     getMarketData(coinObj.tickers);
     coinImage = `<img src="${coinObj.image.small}" width="20px" alt="${coinObj.name}" style="margin-right: 3px"></img>`
-    console.log(coinImage);
     coinName = `<td>` + coinImage + coinObj.name + `</td>`;
     coinSymbol = `<td>` + coinObj.symbol.toUpperCase() + `</td>`; 
     coinUSD = `<td>$` + formatCurrency(coinObj.market_data.current_price.usd) + `</td>`;
@@ -251,3 +269,5 @@ const exampleList = [
 $.each(exampleList, function(index, value){
     $("#exaList").append(`<li>${value}</li>`)
 });
+
+

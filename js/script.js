@@ -39,7 +39,7 @@ $.ajax({
 // check localStorage for cached coin data
 storedDate = new Date(localStorage.getItem("listDate"))
 
-if (printElapsedTime() > 24){
+if (checkElapsedTime() > 24){
     callListAPI()
 } else if (localStorage.getItem("cryptoList") !== null && JSON.parse(localStorage.getItem("cryptoList")).length > 0) {
     coinList = JSON.parse(localStorage.getItem("cryptoList"));
@@ -65,11 +65,11 @@ function callListAPI() {
 }
 
 // test for time elapsed, change return to switch between min and hours
-function printElapsedTime() {
+function checkElapsedTime() {
     const startTime = storedDate.getTime();
     const endTime = Date.now();
     let result = ''
-    minutes = (endTime - startTime) / 60000
+    // minutes = (endTime - startTime) / 60000
     hours = (endTime - startTime) / 3600000
     return hours;
 }

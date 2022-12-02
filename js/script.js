@@ -37,38 +37,42 @@ $.ajax({
 );
 
 // check localStorage for cached coin data
-if (localStorage.getItem("cryptoList") !== null && JSON.parse(localStorage.getItem("cryptoList")).length > 0) {
+storedDate = new Date(localStorage.getItem("listDate"))
+
+if (printElapsedTime() > 24){
+    callListAPI()
+} else if (localStorage.getItem("cryptoList") !== null && JSON.parse(localStorage.getItem("cryptoList")).length > 0) {
     coinList = JSON.parse(localStorage.getItem("cryptoList"));
     storedDate = new Date(localStorage.getItem("listDate"))
     console.log('list exists, cache from local');
 } else {
-    // cache coin data to memory for lookup 
-    $.ajax({
-        url:apiRoot + getList
-    }).then(
-        (data) => {
-            coinList = data;
-            // push new list and timestamp to localStorage
-            localStorage.setItem("cryptoList", JSON.stringify(coinList));
-            localStorage.setItem("listDate",Date())
-            storedDate = new Date(localStorage.getItem("listDate"))
-            console.log('list cached from API');
-    });
+    callListAPI()
 }
 
+// cache coin data to memory for lookup 
+function callListAPI() {
+        $.ajax({
+            url:apiRoot + getList
+        }).then(
+            (data) => {
+                coinList = data;
+                // push new list and timestamp to localStorage
+                localStorage.setItem("cryptoList", JSON.stringify(coinList));
+                localStorage.setItem("listDate",Date())
+                storedDate = new Date(localStorage.getItem("listDate"))
+                console.log('list cached from API');
+        });
+}
 
+// test for time elapsed, change return to switch between min and hours
 function printElapsedTime() {
     const startTime = storedDate.getTime();
-    let result = ''
     const endTime = Date.now();
-  
-    // console.log(`Elapsed time: ${String(endTime - startTime)} milliseconds`);
+    let result = ''
     minutes = (endTime - startTime) / 60000
     hours = (endTime - startTime) / 3600000
-    // console.log(`${hours} hours, ${minutes} minutes`);
-    return minutes;
-  }
-//   console.log(printElapsedTime())
+    return hours;
+}
 
 // varibles needed for table
 let coinName, coinSymbol, coinUSD, coinChange, coinMCap, coinATHPercent, coinATH, coinATHDate, coinMarkets, coinImage

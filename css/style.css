@@ -1,46 +1,63 @@
 * {
+  margin: 0;
   box-sizing: border-box;
 }
 body {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: left;
   justify-content: flex-start;
-  padding: 5%;
+  padding: 3rem;
+  /* padding-top: 2rem; */
   font-family: Helvetica;
   background-color: rgb(245, 245, 245);
 }
+main {
+  flex-grow: 1;
+}
+header , footer {
+  display: flex;
+  align-items: vertical;
+}
+header {
+  height: 4rem;
+}
+footer {
+  justify-content: right;
+  color: red;
+  font-size: small;
+  height: 2rem;
+}
+#welcomeDiv {
+  margin-top: 3rem;
+}
 #clearLocal {
   margin-top: auto;
-  margin-bottom: 2%;
+  margin-bottom: 1rem;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
-  padding: 2%;
+  padding: 1rem;
 }
 #formDiv {
   display: flex;
   flex-direction: row;
   /* justify-content: space-between; */
   align-items: flex-start;
-  padding-top: 5%;
-  padding-bottom: 5%;
+  padding-top: 1rem;
+  padding-bottom: 2rem;
 }
 #formDiv > :last-child{
-  padding-left: 2%;
+  padding-left: 1rem;
 }
 #tableDiv {
-  padding-top: 1%;
-}
-#clearText {
-  color: red;
-  font-size: small;
+  padding-top: 2rem;
 }
 h5 {
   color: rgb(190, 197, 198);
   position: relative;
-  left: var(--left-indent);
+  padding-left: 1rem;
 }
 ul {
   color: rgb(190, 197, 198);
@@ -48,5 +65,5 @@ ul {
   font-size: 15px;
   list-style-type: square;
   position: relative;
-  left: var(--left-indent);
+  padding-left: 1rem;
 }

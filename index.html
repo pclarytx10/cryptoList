@@ -10,41 +10,45 @@
         <title>CryptoList Beta</title>
     </head>
     <body>
-        <div id="welcomeDiv">
+        <header>
             <h1>Welcome to CryptoList</h1>
-            <p>Enter a cryptocurrency Name or Symbol to get started building your list.</p>
-        </div>
-        
-        <div id="formDiv">
-            <form class="row" onSubmit="return false;">
-                <div class="col-auto">
-                    <input id="cryptoInput" type="text" class="form-control" id="curInput" placeholder="bitcoin">
-                </div>
-                <div class="col-auto">
-                    <button id="submitBtn" type="button" class="btn btn-success">Submit</button>
-                </div>
-            </form>
-        </div>
+        </header>
+        <main>
+            <hr style="height:2px;color:rgb(3, 5, 103);background-color:rgb(24, 5, 104)">
 
-        <div id="globalMC">
-            <p>Today, there are <span id="ttlCurrencies" style="color:blue">???</span> currencies and the global cryptocurrency market cap is <span id="ttlMarketCap" style="color:blue">???</span>. This is a <span id="mcChange" style="color:blue">???</span> change in the last 24 hours.</p>
-        </div>
-
-        <div id="tableDiv">
-            <table id="coinsTable" class="table text-center table-hover">
-                <tr>
-                  <th>Name</th>
-                  <th>Symbol</th> 
-                  <th data-toggle="tooltip" title="Price in USD">USD</th>
-                  <th data-toggle="tooltip" title="24hr Price Change in USD">24hr%</th>
-                  <th data-toggle="tooltip" title="% of Total Market Cap">MC%</th>
-                  <th data-toggle="tooltip" title="All Time High">ATH</th>
-                  <th data-toggle="tooltip" title="Relation to ATH">ATH%</th>
-                  <th>ATH Date</th>
-                  <th>Markets</th>
-                </tr>
-            </table>
-        </div>
+            <div id="welcomeDiv">
+                <p>Enter a cryptocurrency Name or Symbol to get started building your list.</p>
+            </div>
+            <div id="formDiv">
+                <form class="row" onSubmit="return false;">
+                    <div class="col-auto">
+                        <input id="cryptoInput" type="text" class="form-control" id="curInput" placeholder="bitcoin">
+                    </div>
+                    <div class="col-auto">
+                        <button id="submitBtn" type="button" class="btn btn-success">Submit</button>
+                    </div>
+                </form>
+            </div>
+            <div id="globalMC">
+                <p>Today, there are <span id="ttlCurrencies" style="color:blue">???</span> currencies and the global cryptocurrency market cap is <span id="ttlMarketCap" style="color:blue">???</span>. This is a <span id="mcChange" style="color:blue">???</span> change in the last 24 hours.</p>
+            </div>
+    
+            <div id="tableDiv">
+                <table id="coinsTable" class="table text-center table-hover">
+                    <tr>
+                      <th>Name</th>
+                      <th>Symbol</th> 
+                      <th data-toggle="tooltip" title="Price in USD">USD</th>
+                      <th data-toggle="tooltip" title="24hr Price Change in USD">24hr%</th>
+                      <th data-toggle="tooltip" title="% of Total Market Cap">MC%</th>
+                      <th data-toggle="tooltip" title="All Time High">ATH</th>
+                      <th data-toggle="tooltip" title="Relation to ATH">ATH%</th>
+                      <th>ATH Date</th>
+                      <th>Markets</th>
+                    </tr>
+                </table>
+            </div>
+        </main>
 
         <div id="exampleDiv">
             <p id="examples">
@@ -54,13 +58,11 @@
             </p>
         </div>
         
-        <div id="clearLocal">
-            <p id="clearText" data-toggle="tooltip" title="Clicking here will clear Local Storage.">Clear Local Storage</p>
-        </div>
-
-
-        <!-- <h2>This is where we're headed...</h2>
-        <img src="/images/cryptolist_main.png" alt="sample image" style="width:500px"> -->
+        <footer>
+            <div id="clearLocal">
+                <p id="clearText" data-toggle="tooltip" title="Clicking here will clear Local Storage.">Clear Local Storage</p>
+            </div>
+        </footer>
 
         <!-- Bootstrap Script -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>

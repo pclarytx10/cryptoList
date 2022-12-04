@@ -37,9 +37,10 @@ A live version of this app is hosted on [Github.io.](https://pclarytx10.github.i
 ### Stretch Goals:
 
 - [x] Add Coin Image to Table Row
+- [x] Sort table by Market Cap
 - [ ] Add logic to test for all "Approved US Markets"
 - [x] LocalStorage of User Input
-  - [ ] Refresh of value on new page load
+  - [x] Refresh of value on new page load
   
 ### Future Enhancements:
 

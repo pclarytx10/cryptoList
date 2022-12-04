@@ -1,5 +1,6 @@
 let globalData, globalMC, coinList, coinID, coinData, coinMarketData, coinRow, $newCrypto, storedDate 
 let userTokens = []
+let cryptoTable = []
 
 const apiRoot ="https://api.coingecko.com/api/v3/"
 // API Methods
@@ -112,8 +113,12 @@ $("form").on('keydown', function(evt) {
     } else {}
   });
 
-// create btc row
-getCoinData('bitcoin')
+// create btc row and render table on first load
+if (cryptoTable.length === 0) {
+    getCoinData('bitcoin');
+    renderTable();
+    testRowStyling();
+}
 
 // load userTokens from localStorage
 if (localStorage.getItem("storedTokens") !== null && localStorage.getItem("storedTokens").length > 0) {
@@ -135,18 +140,23 @@ function numberWithCommas(x) {
 
 // new coin lookup
 function coinLookUp(token) {
-    if(coinList.filter((coin) => coin.symbol==token).length > 1 || token === 'sand') {
-        alert('The token you have entered returns more than one cryptocurrency. Please enter the name of the token instead.')
-    } else if (coinList.find((coin) => coin.symbol==token)){
-        coinID = coinList.find((coin) => coin.symbol==token).id
-        getCoinData(coinID);
-        tokenStore(coinID);
-    } else if (coinList.find((coin) => coin.name==token)) {
-        coinID = coinList.find((coin) => coin.name==token).id
-        getCoinData(coinID);
-        tokenStore(coinID);
+    console.log("looking up: " + token.toLowerCase());
+    if (userTokens.includes(token.toLowerCase())) {
+        alert("Token exists. Please enter another cryptocurrency.");
     } else {
-        alert(`No matching coin found. If your coin name contains multiple words, try capitalizing the second word or formatting it as it appears on CoinGecko's website. Example: "Binance USD" If you have entered a coin ticker that was not found, please try using the full name of the coin. Example: Polygon instead of MATIC`)
+        if(coinList.filter((coin) => coin.symbol==token).length > 1 || token === 'sand') {
+            alert('The token you have entered returns more than one cryptocurrency. Please enter the name of the token instead.')
+        } else if (coinList.find((coin) => coin.symbol==token)){
+            coinID = coinList.find((coin) => coin.symbol==token).id
+            getCoinData(coinID);
+            tokenStore(coinID);
+        } else if (coinList.find((coin) => coin.name==token)) {
+            coinID = coinList.find((coin) => coin.name==token).id
+            getCoinData(coinID);
+            tokenStore(coinID);
+        } else {
+            alert(`No matching coin found. If your coin name contains multiple words, try capitalizing the second word or formatting it as it appears on CoinGecko's website. Example: "Binance USD" If you have entered a coin ticker that was not found, please try using the full name of the coin. Example: Polygon instead of MATIC`)
+        };
     };
 }
 
@@ -164,16 +174,20 @@ function tokenStore(token) {
 }
 
 function tokenDrop(token) {
-    console.log(`Dropping ${token}`);
-    // userTokens.filter(coin => coin != token);
-    // let tokenIdx = userTokens.findIndex(coin => coin == token);
+    // console.log(`Dropping ${token}`);
     for( var i = 0; i < userTokens.length; i++){   
         if ( userTokens[i] === token) { 
             userTokens.splice(i, 1); 
         }
     };
+    for( var i = 0; i < cryptoTable.length; i++){   
+        if ( cryptoTable[i].coinID === token) { 
+            cryptoTable.splice(i, 1); 
+        }
+    };
     localStorage.setItem("storedTokens", JSON.stringify(userTokens));
     console.log(userTokens);
+    console.log(cryptoTable);
 }
 
 // pull coin information 
@@ -212,8 +226,6 @@ function testRowStyling() {
     });
     
 }
-//test on load, also test when new row is created in createTableRow
-testRowStyling()
 
 const usApprovedExchanges = [
     'Coinbase Exchange',
@@ -247,7 +259,7 @@ function getMarketData(objIn) {
     if (marketsArray.includes('Uniswap (v2)')) {
         selectMarkets.push('Uniswap')
     };
-}
+};
 
 function createTableRow(coinObj) {
     getMarketData(coinObj.tickers);
@@ -258,7 +270,7 @@ function createTableRow(coinObj) {
     // console.log(coinObj.market_data.price_change_percentage_24h);
     coinChange = `<td class="athPer">` + coinObj.market_data.price_change_percentage_24h.toFixed(1) + `%</td>`
     let marketCap = coinObj.market_data.market_cap.usd / globalMC * 100
-    coinMCap = `<td>` + marketCap.toFixed(1) + `%</td>`; 
+    coinMCap = `<td class="perMarketCap">` + marketCap.toFixed(1) + `%</td>`; 
     coinATHPercent = `<td class="athPer">` + coinObj.market_data.ath_change_percentage.usd.toFixed(1) + `%</td>`;
     coinATH = `<td>$` + formatCurrency(coinObj.market_data.ath.usd) + `</td>`;
     const newDate = new Date(coinObj.market_data.ath_date.usd).toLocaleDateString('en-US', {
@@ -271,34 +283,28 @@ function createTableRow(coinObj) {
     let tableRow = ""
     if (coinObj.name === 'Bitcoin') {
         // $('.dangerBtn').remove();
-        tableRow = `<tr>
-        ${coinName}
-        ${coinSymbol}
-        ${coinUSD}
-        ${coinChange}
-        ${coinMCap}
-        ${coinATH}
-        ${coinATHPercent}
-        ${coinATHDate}
-        ${coinMarkets}
-        </tr>`
+        tableRow = `<tr class= "coinRow">  ${coinName} ${coinSymbol} ${coinUSD} ${coinChange} ${coinMCap} ${coinATH} ${coinATHPercent} ${coinATHDate} ${coinMarkets} </tr>`
     } else {
-        tableRow = `<tr class="tableRow">
-        ${coinName}
-        ${coinSymbol}
-        ${coinUSD}
-        ${coinChange}
-        ${coinMCap}
-        ${coinATH}
-        ${coinATHPercent}
-        ${coinATHDate}
-        ${coinMarkets}
-        ${btnRow}
-        </tr>`
+        tableRow = `<tr class="tableRow"> ${coinName} ${coinSymbol} ${coinUSD} ${coinChange} ${coinMCap} ${coinATH} ${coinATHPercent} ${coinATHDate} ${coinMarkets} ${btnRow} </tr>`
+    };
+    let row = {
+        html: tableRow,
+        coinID: coinObj.id,
+        sort: coinObj.market_data.market_cap.usd.toFixed(1),
     }
-    $("#coinsTable").append(tableRow)
-    testRowStyling()
-}
+    cryptoTable.push(row);
+    renderTable();
+};
+
+function renderTable() {
+    $(".coinRow, .tableRow").remove();
+    cryptoTable.sort((a,b) => b.sort - a.sort); 
+    cryptoTable.forEach(tableElement => {
+        // console.log(tableElement.sort);
+        $("#coinsTable").append(tableElement.html);
+    });
+    testRowStyling();
+};
 
 // add an event listener for "#coinsTable" remove button
 $("#coinsTable").on("click", ".btn-danger", function (evt) {
@@ -309,7 +315,7 @@ $("#coinsTable").on("click", ".btn-danger", function (evt) {
     const tgtTR = $(tgt).parentsUntil("tbody");
     $(tgtTR).remove();
 
-})
+});
 
 const exampleList = [
     "Ethereum or ETH",
@@ -317,12 +323,11 @@ const exampleList = [
     "Monero or XMR",
     "Polgon or MATIC",
     "Dogecoin or DOGE",
-    "Tether or TUSD",
+    "Tether or USDT",
 ]
 
 // write examples from array
 $.each(exampleList, function(index, value){
     $("#exaList").append(`<li>${value}</li>`)
 });
-
 

@@ -159,8 +159,12 @@ $(function() {
                 coinID = coinList.find((coin) => coin.name==token).id
                 getCoinData(coinID);
                 tokenStore(coinID);
+            } else if (coinList.find((coin) => coin.id==token.toLowerCase())) {
+                coinID = coinList.find((coin) => coin.id==token.toLowerCase()).id
+                getCoinData(coinID);
+                tokenStore(coinID);
             } else {
-                alert(`No matching coin found. If your coin name contains multiple words, try capitalizing the second word or formatting it as it appears on CoinGecko's website. Example: "Binance USD" If you have entered a coin ticker that was not found, please try using the full name of the coin. Example: Polygon instead of MATIC`)
+                alert(`You entered: ${token}    No matching coin found. If your coin name contains multiple words, try capitalizing the second word or formatting it as it appears on CoinGecko's website. Example: "Binance USD" If you have entered a coin ticker that was not found, please try using the full name of the coin. For really tough matches, you can enter the coin id from the CoinGecko API. Example: "ripple" instead of XRP`)
             };
         };
     }

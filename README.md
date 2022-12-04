@@ -16,7 +16,7 @@ CryptoList is an early stage beta for a fully formed crypto currency research an
 
 ## Screenshot(s):
 --- 
-CryptoList Main Page Wireframe:
+CryptoList Main Page:
 
 ![Main Page](images/cryptolist_main.png)
 

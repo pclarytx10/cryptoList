@@ -21,6 +21,8 @@ header , footer {
   align-items: vertical;
 }
 header {
+  border-style: none none solid none;
+  border-color: rgb(190, 197, 198);
   height: 4rem;
 }
 footer {
@@ -58,7 +60,7 @@ h5 {
   color: rgb(190, 197, 198);
   position: relative;
   padding-left: 1rem;
-}
+  text-decoration: underline;}
 ul {
   color: rgb(190, 197, 198);
   columns: 3;

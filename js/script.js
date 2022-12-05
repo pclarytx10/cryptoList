@@ -234,14 +234,26 @@ $(function() {
         
     }
 
-    const usApprovedExchanges = [
-        'Coinbase Exchange',
-        'Crypto.com Exchange',
-        "Kraken",
-        "Uniswap (v2)",
-        "Blockchain.com",
-        "Gemini",
-        "Binance US",
+    // const usApprovedExchanges = [
+    //     'Coinbase Exchange',
+    //     'Crypto.com Exchange',
+    //     'Kraken',
+    //     'Uniswap (v2)',
+    //     'Blockchain.com',
+    //     'Gemini',
+    //     'Binance US',
+    // ]
+
+    const usApprovedExchangeseList = [
+        {exString: 'Coinbase Exchange', exName: 'Coinbase', priority: '1'},
+        {exString: 'Crypto.com Exchange', exName: 'Crypto.com', priority: '3'},
+        {exString: 'Kraken', exName: 'Kraken', priority: '4'},
+        {exString: 'Uniswap (v2)', exName: 'Uniswap v2', priority: '2'},
+        {exString: 'Uniswap (v3)', exName: 'Uniswap v3', priority: '2'},
+        {exString: 'Blockchain.com', exName: 'Blockchain.com', priority: '5'},
+        {exString: 'Gemini', exName: 'Gemini', priority: '6'},
+        {exString: 'Binance US', exName: 'Binance US', priority: '7'},
+        {exString: 'Bittrex', exName: 'Bittrex', priority: '8'},
     ]
 
     //  coinMarketData
@@ -257,14 +269,38 @@ $(function() {
             marketsArray = marketsArray.filter(unique)
         });
         
-        if (marketsArray.includes('Coinbase Exchange')) {
-            selectMarkets.push('Coinbase')
+        if (marketsArray.includes('Uniswap (v3)') && marketsArray.includes('Uniswap (v2)')) {
+            function findUni2(mkt) {
+                return mkt === 'Uniswap (v2)';
+            }
+            foundUni = marketsArray.findIndex(findUni2);
+            marketsArray.splice(foundUni, 1);
         };
-        if (marketsArray.includes('Crypto.com Exchange')) {
-            selectMarkets.push('Crypto.com')
-        };
-        if (marketsArray.includes('Uniswap (v2)')) {
-            selectMarkets.push('Uniswap')
+
+        let tempMarketsArray = []
+        $.each(marketsArray, function(idx, value){
+            if (usApprovedExchangeseList.find(exchange => exchange.exString === value)) {         
+                let exchange = usApprovedExchangeseList.find(exchange => exchange.exString === value).exName
+                let exPriority = usApprovedExchangeseList.find(exchange => exchange.exString === value).priority
+                tempMarketsArray.push({name: exchange, priority: exPriority});
+            };
+        });
+
+        const sortedMarkets = tempMarketsArray.sort((e1, e2) => e1.priority - e2.priority);
+
+        console.log(sortedMarkets);
+
+        if (sortedMarkets.length > 3) {
+            mktArray = sortedMarkets.slice(0,3);
+            $.each(mktArray, function(idx,value){
+                selectMarkets.push(mktArray[idx].name);
+            });    
+        } else if (sortedMarkets.length > 0){
+            $.each(mktArray, function(idx,value){
+                selectMarkets.push(mktArray[idx].name);
+            }); 
+        } else {
+            selectMarkets.push('No US Markets')
         };
     };
 

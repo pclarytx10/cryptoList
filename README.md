@@ -29,10 +29,14 @@ A live version of this app is hosted on [Github.io.](https://pclarytx10.github.i
 --- 
 
 - [x] User input form
-  - [x] Currency Name or Symbol
+  - [x] Currency Name, Symbol, CoinGeck API Key
+  - [x] Error handling and help alert
+- [x] AJAX query to CoinGecko
 - [x] Basic Reporting
   - [x] Currency List
-- [x] AJAX query to CoinGecko
+  - [x] Ability to Remove Currencies from the List
+- [x] Local Storage of User Input
+  - [x] Ability to "Clear Local Storage"
 
 ### Stretch Goals:
 

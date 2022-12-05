@@ -288,7 +288,7 @@ $(function() {
 
         const sortedMarkets = tempMarketsArray.sort((e1, e2) => e1.priority - e2.priority);
 
-        console.log(sortedMarkets);
+        // console.log(sortedMarkets);
 
         if (sortedMarkets.length > 3) {
             mktArray = sortedMarkets.slice(0,3);

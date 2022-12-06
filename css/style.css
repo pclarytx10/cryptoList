@@ -70,7 +70,13 @@ ul {
   padding-left: 1rem;
 }
 
-@media only screen and (max-width: 429px) {
+/* @media only screen and (max-width: 429px) {
+  body {
+    font-size: 18px;
+  }
+  #formDiv {
+    width: auto;
+  }
   td {
     font-size: 15px;
   }
@@ -86,10 +92,14 @@ ul {
   .form-check {
     visibility: hidden;
     /* display: none; */
-  }
-}
+  /* }
+} */
+
 @media only screen and (max-width: 1124px) {
   .mkts {
+    display: none;
+  }
+  .mc {
     display: none;
   }
 }

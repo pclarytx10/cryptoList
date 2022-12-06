@@ -1,5 +1,5 @@
-// IIFE - keeps variables from leaking to global scope
-$(function() {
+// // IIFE - keeps variables from leaking to global scope
+// $(function() {
     let globalData, globalMC, coinList, coinID, coinData, coinMarketData, coinRow, $newCrypto, storedDate 
     let userTokens = []
     let cryptoTable = []
@@ -306,23 +306,23 @@ $(function() {
 
     function createTableRow(coinObj) {
         getMarketData(coinObj.tickers);
-        coinImage = `<img src="${coinObj.image.small}" width="20px" alt="${coinObj.name}" style="margin-right: 3px"></img>`
+        coinImage = `<img class="coinImg" src="${coinObj.image.small}" width="20px" alt="${coinObj.name}" style="margin-right: 3px"></img>`
         coinName = `<td class="ccName">` + coinImage + coinObj.name + `</td>`;
         coinSymbol = `<td>` + coinObj.symbol.toUpperCase() + `</td>`; 
         coinUSD = `<td>$` + formatCurrency(coinObj.market_data.current_price.usd) + `</td>`;
         // console.log(coinObj.market_data.price_change_percentage_24h);
-        coinChange = `<td class="athPer">` + coinObj.market_data.price_change_percentage_24h.toFixed(1) + `%</td>`
+        coinChange = `<td class="perChange">` + coinObj.market_data.price_change_percentage_24h.toFixed(1) + `%</td>`
         let marketCap = coinObj.market_data.market_cap.usd / globalMC * 100
-        coinMCap = `<td class="perMarketCap">` + marketCap.toFixed(1) + `%</td>`; 
-        coinATHPercent = `<td class="athPer">` + coinObj.market_data.ath_change_percentage.usd.toFixed(1) + `%</td>`;
-        coinATH = `<td>$` + formatCurrency(coinObj.market_data.ath.usd) + `</td>`;
+        coinMCap = `<td class="mc perMarketCap">` + marketCap.toFixed(1) + `%</td>`; 
+        coinATHPercent = `<td class="ath athPer">` + coinObj.market_data.ath_change_percentage.usd.toFixed(1) + `%</td>`;
+        coinATH = `<td class="ath">$` + formatCurrency(coinObj.market_data.ath.usd) + `</td>`;
         const newDate = new Date(coinObj.market_data.ath_date.usd).toLocaleDateString('en-US', {
         day:   'numeric',
         month: 'short',
         year:  'numeric',
         });
-        coinATHDate = `<td>` + newDate + `</td>`; 
-        coinMarkets = `<td>${selectMarkets.join(', ')}</td>`; 
+        coinATHDate = `<td class="ath">` + newDate + `</td>`; 
+        coinMarkets = `<td class="mkts">${selectMarkets.join(', ')}</td>`; 
         let tableRow = ""
         if (coinObj.name === 'Bitcoin') {
             // $('.dangerBtn').remove();
@@ -373,4 +373,15 @@ $(function() {
     $.each(exampleList, function(index, value){
         $("#exaList").append(`<li>${value}</li>`)
     });
-})
+
+    // show / hide table columns
+    $('#flexSwitchCheckChecked').on('click',function() {
+        console.log("Switch");
+        if ($('#flexSwitchCheckChecked').prop('checked') !== true) {
+            $(".ath").attr("style","display:none");
+        } else {
+            $(".ath").attr("style","display:")
+        };
+    });
+
+// })

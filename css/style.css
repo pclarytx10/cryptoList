@@ -69,3 +69,28 @@ ul {
   position: relative;
   padding-left: 1rem;
 }
+
+@media only screen and (max-width: 429px) {
+  td {
+    font-size: 15px;
+  }
+  .mc {
+    display: none;
+  }
+  .ath {
+    display: none;
+  }
+  .coinImg {
+    width: 15px;
+  }
+  .form-check {
+    visibility: hidden;
+    /* display: none; */
+  }
+}
+@media only screen and (max-width: 1124px) {
+  .mkts {
+    display: none;
+  }
+}
+

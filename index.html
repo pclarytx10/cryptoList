@@ -29,20 +29,24 @@
             </div>
             <div id="globalMC">
                 <p>Today, there are <span id="ttlCurrencies" style="color:blue">???</span> currencies and the global cryptocurrency market cap is <span id="ttlMarketCap" style="color:blue">???</span>. This is a <span id="mcChange" style="color:blue">???</span> change in the last 24 hours.</p>
+
             </div>
-    
-            <div id="tableDiv">
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+                <label class="form-check-label" for="flexSwitchCheckChecked">Display ATH Information</label>
+            </div>   
+            <div id="tableDiv">                             
                 <table id="coinsTable" class="table text-center table-hover">
                     <tr>
                       <th>Name</th>
                       <th data-toggle="tooltip" title="Currency Market Ticker">Symbol</th> 
                       <th data-toggle="tooltip" title="Price in USD">USD</th>
                       <th data-toggle="tooltip" title="24hr Price Change in USD">24hr%</th>
-                      <th data-toggle="tooltip" title="% of Total Market Cap">MC%</th>
-                      <th data-toggle="tooltip" title="All Time High">ATH</th>
-                      <th data-toggle="tooltip" title="Relation to ATH">ATH%</th>
-                      <th data-toggle="tooltip" title="ATH Date">ATH Date</th>
-                      <th data-toggle="tooltip" title="Known US Markets">Markets</th>
+                      <th class="mc" data-toggle="tooltip" title="% of Total Market Cap">MC%</th>
+                      <th class="ath" data-toggle="tooltip" title="All Time High">ATH</th>
+                      <th class="ath" data-toggle="tooltip" title="Relation to ATH">ATH%</th>
+                      <th class="ath" data-toggle="tooltip" title="ATH Date">ATH Date</th>
+                      <th class="mkts" data-toggle="tooltip" title="Known US Markets">Markets</th>
                     </tr>
                 </table>
             </div>

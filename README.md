@@ -45,7 +45,7 @@ A live version of this app is hosted on [Github.io.](https://pclarytx10.github.i
 - [x] Add logic to test for all "Approved US Markets"
 - [x] LocalStorage of User Input
   - [x] Refresh of value on new page load
-- [x] Enable responsive layout @1124 & 429 px
+- [x] Enable responsive layout @1124 
   - [x] Add manual toggle for small screen table layout
   
 ### Future Enhancements:

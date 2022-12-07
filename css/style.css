@@ -69,6 +69,11 @@ ul {
   position: relative;
   padding-left: 1rem;
 }
+main > .form-switch {
+  display: flex;
+  justify-content: right;
+  margin-right: 1rem;
+}
 
 /* @media only screen and (max-width: 429px) {
   body {

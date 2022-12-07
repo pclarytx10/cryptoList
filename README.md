@@ -1,7 +1,7 @@
 # CryptoList
 --- 
 
-CryptoList is an early stage beta for a fully formed crypto currency research and portfolio management solution. The primary purpose of this app is to beta user input and API queries. This project is based on an automated spreadsheet used to manage cryptocurrency research, price monitoring, and portfolio management over a six year period. 
+CryptoList is an early stage beta for a crypto currency research and portfolio management solution. The primary purpose of this app is to beta user input and API queries. This project is based on an automated spreadsheet used to manage cryptocurrency research, price monitoring, and portfolio management over a six year period. 
 
 ## Technologies Used: 
 --- 

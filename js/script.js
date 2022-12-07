@@ -221,7 +221,7 @@ $(function() {
     }
 
     function testRowStyling() {
-        rowArray = $('.athPer')
+        rowArray = $('.athPer, .perChange')
         $.each(rowArray, function(index, value){
             rowVal = rowArray[index].innerText
             rovVal = rowVal.slice(0, -1); 
@@ -379,8 +379,10 @@ $(function() {
         console.log("Switch");
         if ($('#flexSwitchCheckChecked').prop('checked') !== true) {
             $(".ath").attr("style","display:none");
+            // testRowStyling();
         } else {
             $(".ath").attr("style","display:")
+            testRowStyling();
         };
     });
 

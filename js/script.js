@@ -229,13 +229,10 @@ $(function() {
         $.each(rowArray, function(index, value){
             let rowVal = rowArray[index].innerText
             rowVal = rowVal.slice(0, -1); 
-            console.log(rowVal);
             if (rowVal > 0) {
                 rowArray.attr('style','color:green;')
-                console.log('greater than');
             } else {
                 rowArray.attr('style','color:red;')
-                console.log('Less than');
             };
         });
     }

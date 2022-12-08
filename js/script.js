@@ -368,7 +368,7 @@ $(function() {
 
     // show / hide table columns
     $('#flexSwitchCheckChecked').on('click',function() {
-        console.log("Switch");
+        // console.log("Switch");
         if ($('#flexSwitchCheckChecked').prop('checked') !== true) {
             $(".ath").attr("style","display:none");
             // testRowStyling();

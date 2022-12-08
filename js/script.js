@@ -227,12 +227,12 @@ $(function() {
 
     function rowStyling(rowArray) {
         $.each(rowArray, function(index, value){
-            let rowVal = rowArray[index].innerText
-            rowVal = rowVal.slice(0, -1); 
-            if (rowVal > 0) {
-                rowArray.attr('style','color:green;')
+            let rowVal = rowArray[index]
+            let rowValNum = rowVal.innerText.slice(0, -1); 
+            if (rowValNum > 0) {
+                $(this).css('color','green')
             } else {
-                rowArray.attr('style','color:red;')
+                $(this).css('color','red')
             };
         });
     }

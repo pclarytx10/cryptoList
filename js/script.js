@@ -227,8 +227,7 @@ $(function() {
 
     function rowStyling(rowArray) {
         $.each(rowArray, function(index, value){
-            let rowVal = rowArray[index]
-            let rowValNum = rowVal.innerText.slice(0, -1); 
+            let rowValNum = value.innerText.slice(0,-1);
             if (rowValNum > 0) {
                 $(this).css('color','green')
             } else {
@@ -236,16 +235,6 @@ $(function() {
             };
         });
     }
-
-    // const usApprovedExchanges = [
-    //     'Coinbase Exchange',
-    //     'Crypto.com Exchange',
-    //     'Kraken',
-    //     'Uniswap (v2)',
-    //     'Blockchain.com',
-    //     'Gemini',
-    //     'Binance US',
-    // ]
 
     const usApprovedExchangeseList = [
         {exString: 'Coinbase Exchange', exName: 'Coinbase', priority: '1'},

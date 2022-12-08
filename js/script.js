@@ -1,5 +1,5 @@
 // // IIFE - keeps variables from leaking to global scope
-$(function() {
+// $(function() {
     let globalData, globalMC, coinList, coinID, coinData, coinMarketData, coinRow, $newCrypto, storedDate 
     let userTokens = []
     let cryptoTable = []
@@ -221,17 +221,23 @@ $(function() {
     }
 
     function testRowStyling() {
-        rowArray = $('.athPer, .perChange')
+        rowStyling($('.perChange'));
+        rowStyling($('.athPer'));    
+    }
+
+    function rowStyling(rowArray) {
         $.each(rowArray, function(index, value){
-            rowVal = rowArray[index].innerText
-            rovVal = rowVal.slice(0, -1); 
+            let rowVal = rowArray[index].innerText
+            rowVal = rowVal.slice(0, -1); 
+            console.log(rowVal);
             if (rowVal > 0) {
                 rowArray.attr('style','color:green;')
+                console.log('greater than');
             } else {
                 rowArray.attr('style','color:red;')
+                console.log('Less than');
             };
         });
-        
     }
 
     // const usApprovedExchanges = [
@@ -386,4 +392,4 @@ $(function() {
         };
     });
 
-})
+// })

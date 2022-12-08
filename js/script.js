@@ -1,5 +1,5 @@
 // // IIFE - keeps variables from leaking to global scope
-// $(function() {
+$(function() {
     let globalData, globalMC, coinList, coinID, coinData, coinMarketData, coinRow, $newCrypto, storedDate 
     let userTokens = []
     let cryptoTable = []
@@ -392,4 +392,4 @@
         };
     });
 
-// })
+})
